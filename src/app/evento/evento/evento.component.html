@@ -1,0 +1,35 @@
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+
+    </div>
+    <div class="p-toolbar-group-right">
+        <button pButton type="button" icon="pi pi-chevron-left" class="right" routerLink="/cliente-listar"></button>
+    </div>
+</p-toolbar>
+<div class="form">
+
+    <div class="p-fluid grid">
+        <div class="field col-12 md:col-6">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText>
+                <label for="inputtext">Nome Completo</label>
+            </span>
+        </div>
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label p-input-icon-left">
+                <input type="text" id="inputtext-left" pInputText>
+                <label for="inputtext-left">CPF</label>
+            </span>
+        </div>
+        <div class="field col-12 md:col-12">
+            <label for="inputtext">Data de Nascimento</label>
+            <input placeholder="Data de Nascimento" type="date" id="inputtext" pInputText>
+        </div>
+        <div class="field col-12 md:col-6">
+            <span class="p-float-label">
+                <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" optionLabel="name"></p-dropdown>
+                <label for="dropdown">Gênero</label>
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,8 @@
+import { RouterLink } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
+import { Cliente } from './../cliente';
+import { ClienteService } from './../cliente.service';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -7,9 +11,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClienteListaComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+
+  cliente!: Cliente[];
+
+  cols!: any[];
+
+
+  constructor(private clienteService: ClienteService) {
+
+    this.clienteService.getCliente().subscribe(cliente => this.cliente = cliente);
+
   }
 
+
+  ngOnInit() {
+
+
+    this.cols = [
+
+      { field: 'name', header: 'name' },
+      { field: 'cpf', header: 'cpf' },
+      { field: 'genero', header: 'genero' },
+      { field: 'dataNasc', header: 'dataNasc' }
+
+    ]
+
+
+  }
 }

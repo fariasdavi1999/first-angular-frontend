@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 import { Cliente } from './cliente';
 
@@ -8,13 +8,11 @@ import { Cliente } from './cliente';
 })
 export class ClienteService {
 
+  private readonly api = '/assets/clientes.json'
+
   constructor(private http: HttpClient) { }
 
-  getClienteSmall() {
-    return this.http.get<any>('assets/clientes.json')
-      .toPromise()
-      .then(res => <Cliente[]>res.data)
-      .then(data => { return data; });
+  getCliente() {
+    return this.http.get<Cliente[]>(this.api);
   }
-
 }

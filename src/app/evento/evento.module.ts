@@ -3,27 +3,29 @@ import { NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SplitButtonModule } from 'primeng/splitbutton';
-import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
+import { DropdownModule } from 'primeng/dropdown';
 
-import { ClienteListaComponent } from './cliente-lista/cliente-lista.component';
-import { ClienteRoutingModule } from './cliente-routing.module';
-import { ClienteComponent } from './cliente/cliente.component';
+import { EventoListaComponent } from './evento-lista/evento-lista.component';
+import { EventoRoutingModule } from './evento-routing.module';
+import { EventoComponent } from './evento/evento.component';
+
 
 
 @NgModule({
   declarations: [
-    ClienteComponent,
-    ClienteListaComponent
+    EventoComponent,
+    EventoListaComponent
+
   ],
   imports: [
     CommonModule,
-    ClienteRoutingModule,
-    TableModule,
+    EventoRoutingModule,
     ButtonModule,
     InputTextModule,
     ToolbarModule,
-    SplitButtonModule
+    SplitButtonModule,
+    DropdownModule
   ]
 })
-export class ClienteModule { }
+export class EventoModule { }

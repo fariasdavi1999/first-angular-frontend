@@ -16,19 +16,22 @@ export class MenuComponent implements OnInit {
 
     this.items = [
       {
-        label: 'Navigate',
-        items: [{
-          label: 'Angular',
-          icon: 'pi pi-external-link',
-          url: ''
-        },
-        {
-          label: 'Router',
-          icon: 'pi pi-upload',
-          routerLink: ''
-        }
-        ]
+        label: 'Home',
+        icon: 'pi pi-home',
+        routerLink: '/'
+      },
+      {
+        label: 'Clientes',
+        icon: 'pi pi-users',
+        routerLink: '/cliente-listar'
+      },
+      {
+        label: 'Sair',
+        icon: 'pi pi-sign-out',
+        routerLink: ''
       }
+
+
     ];
   }
 }

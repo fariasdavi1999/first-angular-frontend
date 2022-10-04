@@ -1,10 +1,14 @@
-{
-    "data": [
-        {
-            "cpf": "cpf",
-            "name": "nome",
-            "genero": "genero",
-            "dataNasc": "data de nascimento"
-        }
-    ]
-}
+[
+    {
+        "cpf": "000",
+        "name": "davi",
+        "genero": "m",
+        "dataNasc": "22/07/1999"
+    },
+    {
+        "cpf": "111",
+        "name": "guilherme",
+        "genero": "m",
+        "dataNasc": "00/00/98"
+    }
+]
