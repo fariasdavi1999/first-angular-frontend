@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Cliente } from './cliente';
 
@@ -8,13 +9,30 @@ import { Cliente } from './cliente';
 })
 export class ClienteService {
 
-  private readonly api = '/assets/clientes.json'
+  private API = 'http://localhost:8080/api/clientes'
 
   constructor(private http: HttpClient) { }
 
-  getCliente() {
+  listarTodos() {
 
-    return this.http.get<Cliente[]>(this.api);
+    return this.http.get<Array<Cliente>>(`${this.API}/listar-clientes`);
 
   }
+
+  getById(id: number): Observable<Cliente> {
+    return this.http.get<Cliente>(`${this.API}/${id}}`)
+  }
+
+  getIncluir(request: Cliente) {
+    return this.http.post<Cliente>(this.API, request);
+  }
+
+  getAlterar(id: Number | null, request: Cliente) {
+    return this.http.put<Cliente>(`${this.API}/${id}`, request);
+  }
+
+  getExcluir(id: Number) {
+    return this.http.delete<Cliente>(`${this.API}/${id}`);
+  }
+
 }

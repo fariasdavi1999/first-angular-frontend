@@ -1,6 +1,8 @@
-export interface Cliente {
-    cpf: string;
-    name: string;
-    genero: string;
-    dataNasc: string;
+export class Cliente {
+
+    id!: number;
+    cpfCliente!: string;
+    nomeCliente!: string;
+    dataNasc!: string;
+
 }

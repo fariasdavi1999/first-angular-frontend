@@ -1,28 +1,29 @@
 <div class="flex justify-content-end mr-1 mt-1">
-    <button pButton label="Novo Cliente" icon="pi pi-plus" routerLink="/novo-cliente" class="mr-2 p-button-success">
+    <button pButton label="Novo Cliente" icon="pi pi-plus" [routerLink]="['novo-cliente']"
+        class="right mr-2 p-button-success">
     </button>
 </div>
 
 
-<div class="card">
+<div class="card ml-5 mr-5 ">
     <p-table responsiveLayout="stack" [value]="cliente">
         <ng-template pTemplate="caption">
             Clientes
         </ng-template>
         <ng-template pTemplate="header" let-cols>
             <tr>
+                <th>ID</th>
                 <th>Nome </th>
                 <th>CPF</th>
-                <th>Gênero</th>
                 <th>Data de Nascimento</th>
                 <th></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-cliente let-cols="columns">
             <tr>
-                <td><span class="p-column-title">Nome</span> {{cliente.name}} </td>
-                <td><span class="p-column-title">CPF</span> {{cliente.cpf}} </td>
-                <td><span class="p-column-title">Gênero</span> {{cliente.genero}} </td>
+                <td><span class="p-column-title">ID</span> {{cliente.id}} </td>
+                <td><span class="p-column-title">Nome</span> {{cliente.nomeCliente}} </td>
+                <td><span class="p-column-title">CPF</span> {{cliente.cpfCliente}} </td>
                 <td><span class="p-column-title">Data de Nascimento</span> {{cliente.dataNasc}} </td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>

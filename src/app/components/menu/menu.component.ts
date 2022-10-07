@@ -15,6 +15,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
 
     this.items = [
+
       {
         label: 'Home',
         icon: 'pi pi-home',
@@ -23,13 +24,14 @@ export class MenuComponent implements OnInit {
       {
         label: 'Clientes',
         icon: 'pi pi-users',
-        routerLink: '/cliente-listar'
+        routerLink: '/cliente'
       },
       {
         label: 'Sair',
         icon: 'pi pi-sign-out',
         routerLink: ''
       }
+
 
 
     ];

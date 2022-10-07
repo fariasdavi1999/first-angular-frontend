@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ClienteModule } from './cliente/cliente.module';
+import { HomeModule } from './home/home.module';
+
 const routes: Routes = [
 
-  { path: '', pathMatch: 'full', redirectTo: '' },
+  { path: 'home', pathMatch: 'full', redirectTo: 'home' },
 
-  { path: 'cliente-listar', loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule) },
+  { path: 'home', loadChildren: () => HomeModule },
 
-  { path: 'novo-cliente', loadChildren: () => import('./evento/evento.module').then(m => m.EventoModule) },
+  { path: 'cliente', loadChildren: () => ClienteModule }
 
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) }
 
 ];
 

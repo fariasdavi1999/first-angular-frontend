@@ -1,4 +1,3 @@
-import { RouterLink } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { Cliente } from './../cliente';
@@ -20,7 +19,6 @@ export class ClienteListaComponent implements OnInit {
 
   constructor(private clienteService: ClienteService) {
 
-    this.clienteService.getCliente().subscribe(cliente => this.cliente = cliente);
 
   }
 
@@ -30,13 +28,14 @@ export class ClienteListaComponent implements OnInit {
 
     this.cols = [
 
-      { field: 'name', header: 'name' },
+      { field: 'nome', header: 'nome' },
       { field: 'cpf', header: 'cpf' },
       { field: 'genero', header: 'genero' },
       { field: 'dataNasc', header: 'dataNasc' }
 
     ]
 
+    this.clienteService.listarTodos().subscribe(cliente => this.cliente = cliente);
 
   }
 }

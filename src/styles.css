@@ -2,3 +2,11 @@
 * {
   font-family: sans-serif;
 }
+
+.p-menubar {
+  background: rgb(71, 71, 71) !important;
+}
+
+.p-menubar .p-menuitem-link .p-menuitem-text {
+  color: #a29b9b !important;
+}
