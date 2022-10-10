@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
@@ -14,6 +16,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ClienteListaComponent } from './cliente-lista/cliente-lista.component';
 import { ClienteRoutingModule } from './cliente-routing.module';
 import { ClienteComponent } from './cliente/cliente.component';
+
 
 
 @NgModule({
@@ -33,7 +36,9 @@ import { ClienteComponent } from './cliente/cliente.component';
     FormsModule,
     MessagesModule,
     MessageModule,
-    CalendarModule
+    CalendarModule,
+    ConfirmDialogModule,
+    InputMaskModule
   ]
 })
 export class ClienteModule { }

@@ -1,40 +1,45 @@
+<p-messages></p-messages>
+<p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+
 <div class="flex justify-content-end mr-2 mt-1">
-    <button pButton type="button" icon="pi pi-chevron-left" class="right p-button-success"
+    <button pButton type="button" icon="pi pi-chevron-left" label="Voltar" class="right p-button-primary"
         [routerLink]="['/cliente']"></button>
 </div>
 
 
 <div class="form">
-    <form autocomplete="off" #f="ngForm" (ngSubmit)="getIncluir()">
+    <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
         <div class="p-fluid grid">
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
                     <input type="text" id="inputtext" pInputText required [(ngModel)]="cliente.nomeCliente"
-                        name="something">
+                        #nomeCliente="ngModel"
+                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && nomeCliente.invalid && (nomeCliente.dirty || nomeCliente.touched) }"
+                        name="nomeCliente">
                     <label for="inputtext">Nome Completo</label>
                 </span>
             </div>
             <div class="field col-12 md:col-6">
-                <span class="p-float-label p-input-icon-left">
-                    <input type="text" id="inputtext-left" pInputText required [(ngModel)]="cliente.cpfCliente"
-                        name="something">
-                    <label for="inputtext-left">CPF</label>
+                <span class="p-float-label">
+                    <p-inputMask type="text" id="cpfCliente" mask="999.999.999-99" [(ngModel)]="cliente.cpfCliente"
+                        name="cpfCliente" #cpfCliente="ngModel"
+                        [ngClass]="{'ng-invalid ng-dirty': f.submitted && cpfCliente.invalid && (cpfCliente.dirty || cpfCliente.touched) }">
+                    </p-inputMask>
+                    <label for="cpfCliente">CPF</label>
                 </span>
             </div>
-            <div class="field col-12 md:col-12">
-                <label for="inputtext">Data de Nascimento</label>
-                <p-calendar [(ngModel)]="cliente.dataNasc" inputId="template">
-                    <ng-template pTemplate="date" let-date>
-                        <span
-                            [ngStyle]="{textDecoration: (date.day < 21 && date.day > 10) ? 'line-through' : 'inherit'}">{{date.day}}</span>
-                    </ng-template>
-                </p-calendar>
-                <input placeholder="Data de Nascimento" id="inputtext" pInputText required
-                    [(ngModel)]="cliente.dataNasc" name="something">
+            <div class="field col-12 md:col-6">
+                <label for="date">Data de Nascimento</label>
+                <p-inputMask mask="99/99/9999" [(ngModel)]="cliente.dataNasc" placeholder="99/99/9999"
+                    slotChar="dd/mm/yyyy" name="dataNasc"></p-inputMask>
+
+                <!-- <input id="date" type="date" pInputText required [(ngModel)]="cliente.dataNasc" name="something"
+                    #dataNasc="ngModel"
+                    [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && dataNasc.invalid && (dataNasc.dirty || dataNasc.touched) }"> -->
             </div>
         </div>
-        <div class="flex justify-content-end grid p-fluid col-2">
-            <button class="right p-button-success" pButton label="Salvar" [disabled]="!f.valid"></button>
+        <div class="grid p-fluid col-2">
+            <button class=" p-button-success" pButton label="Salvar" [disabled]="!f.valid"></button>
         </div>
     </form>
 </div>

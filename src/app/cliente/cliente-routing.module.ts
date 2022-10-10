@@ -8,7 +8,9 @@ const routes: Routes = [
 
   { path: '', component: ClienteListaComponent },
 
-  { path: 'novo-cliente', component: ClienteComponent }
+  { path: 'novo-cliente', component: ClienteComponent },
+
+  { path: ':id', component: ClienteComponent }
 
 
 ]

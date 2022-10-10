@@ -19,20 +19,28 @@ export class ClienteService {
 
   }
 
-  getById(id: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.API}/${id}}`)
+  getById(id: any): Observable<Cliente> {
+
+    return this.http.get<Cliente>(`${this.API}/${id}`)
+
   }
 
   getIncluir(request: Cliente) {
+
     return this.http.post<Cliente>(this.API, request);
+
   }
 
-  getAlterar(id: Number | null, request: Cliente) {
+  getAlterar(id: any, request: Cliente) {
+
     return this.http.put<Cliente>(`${this.API}/${id}`, request);
+
   }
 
-  getExcluir(id: Number) {
+  getExcluir(id: any) {
+
     return this.http.delete<Cliente>(`${this.API}/${id}`);
+
   }
 
 }
