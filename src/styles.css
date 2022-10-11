@@ -32,6 +32,7 @@
     top: 100%;
     right: 0 !important;
     width: 180px !important;
+    background: rgb(71, 71, 71) !important;
     z-index: 1;
   }
   .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {

@@ -99,7 +99,7 @@ export class ClienteComponent implements OnInit {
 
         setTimeout(() => {
           this.router.navigate(['/cliente'])
-        }, 1000);
+        }, 1300);
       }, (erro) => {
         console.log(erro);
       }

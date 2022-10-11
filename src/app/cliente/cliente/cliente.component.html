@@ -29,16 +29,18 @@
                 </span>
             </div>
             <div class="field col-12 md:col-6">
-                <label for="date">Data de Nascimento</label>
-                <p-inputMask mask="99/99/9999" [(ngModel)]="cliente.dataNasc" placeholder="99/99/9999"
-                    slotChar="dd/mm/yyyy" name="dataNasc"></p-inputMask>
+                <span class="p-float-label">
+                    <p-inputMask mask="99/99/9999" [(ngModel)]="cliente.dataNasc" placeholder="99/99/9999"
+                        slotChar="dd/mm/yyyy" name="dataNasc"></p-inputMask>
+                    <label for="date">Data de Nascimento</label>
+                </span>
 
                 <!-- <input id="date" type="date" pInputText required [(ngModel)]="cliente.dataNasc" name="something"
                     #dataNasc="ngModel"
                     [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && dataNasc.invalid && (dataNasc.dirty || dataNasc.touched) }"> -->
             </div>
         </div>
-        <div class="grid p-fluid col-2">
+        <div class="flex justify-content-start mr-2 mt-1">
             <button class=" p-button-success" pButton label="Salvar" [disabled]="!f.valid"></button>
         </div>
     </form>
