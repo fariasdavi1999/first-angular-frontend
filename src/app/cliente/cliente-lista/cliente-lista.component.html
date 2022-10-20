@@ -37,7 +37,13 @@
                     <button pButton pRipple icon="pi pi-trash" class="p-button-raised p-button-danger"
                         (click)="deletar(clientes.id)"></button>
                 </td>
+                <td>
+                    <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel"
+                        [value]="clientes.nomeCliente" cssClass="aclass">
+                    </ngx-qrcode>
+                </td>
             </tr>
         </ng-template>
     </p-table>
+
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { ConfirmationService, ConfirmEventType, LazyLoadEvent, MessageService } from 'primeng/api';
 
 import { Cliente } from './../cliente';
@@ -23,6 +24,10 @@ export class ClienteListaComponent implements OnInit {
   cliente: Cliente = new Cliente;
 
   cols!: any[];
+
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  value = '';
 
 
   constructor(
@@ -62,8 +67,9 @@ export class ClienteListaComponent implements OnInit {
         this.clientesLazyLoad = [...response]
         this.totalDeRegistros = response.length
       }
-
     )
+
+
   }
 
 
@@ -122,6 +128,9 @@ export class ClienteListaComponent implements OnInit {
     }, 500);
 
   }
+
+
+
 
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 
 import { Cliente } from '../cliente';
@@ -32,6 +33,8 @@ export class ClienteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+
 
     const id: any = this.route.snapshot.params['id'];
 
@@ -122,5 +125,10 @@ export class ClienteComponent implements OnInit {
     )
 
   }
+
+
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  value = '';
 
 }

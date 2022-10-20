@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -38,7 +39,8 @@ import { ClienteComponent } from './cliente/cliente.component';
     MessageModule,
     CalendarModule,
     ConfirmDialogModule,
-    InputMaskModule
+    InputMaskModule,
+    NgxQRCodeModule
   ]
 })
 export class ClienteModule { }

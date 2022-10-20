@@ -43,5 +43,8 @@
         <div class="flex justify-content-start mr-2 mt-1">
             <button class=" p-button-success" pButton label="Salvar" [disabled]="!f.valid"></button>
         </div>
+        <ngx-qrcode class="flex justify-content-center" [elementType]="elementType"
+            [errorCorrectionLevel]="correctionLevel" [value]="cliente.nomeCliente" cssClass=" aclass">
+        </ngx-qrcode>
     </form>
 </div>

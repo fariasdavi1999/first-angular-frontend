@@ -16,8 +16,6 @@ import { CoreModule } from './core/core/core.module';
   declarations: [
     AppComponent,
 
-
-
   ],
   imports: [
     AppRoutingModule,
