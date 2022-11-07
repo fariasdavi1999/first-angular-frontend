@@ -21,6 +21,8 @@
                 <th>Nome </th>
                 <th>CPF</th>
                 <th>Data de Nascimento</th>
+                <th>Tarefa</th>
+                <th>QR</th>
                 <th></th>
             </tr>
         </ng-template>
@@ -30,17 +32,18 @@
                 <td><span class="p-column-title">Nome</span> {{clientes.nomeCliente}} </td>
                 <td><span class="p-column-title">CPF</span> {{clientes.cpfCliente}} </td>
                 <td><span class="p-column-title">Data de Nascimento</span> {{clientes.dataNasc}} </td>
+                <td><span class="p-column-title">Tarefa</span> </td>
+                <td>
+                    <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel"
+                        [value]="clientes.nomeCliente" cssClass="aclass">
+                    </ngx-qrcode>
+                </td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-raised p-button-primary mr-2"
                         [routerLink]="['/cliente', clientes.id]"></button>
 
                     <button pButton pRipple icon="pi pi-trash" class="p-button-raised p-button-danger"
                         (click)="deletar(clientes.id)"></button>
-                </td>
-                <td>
-                    <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel"
-                        [value]="clientes.nomeCliente" cssClass="aclass">
-                    </ngx-qrcode>
                 </td>
             </tr>
         </ng-template>

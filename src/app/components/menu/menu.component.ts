@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
@@ -8,9 +9,15 @@ import { MenuItem } from 'primeng/api';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+
+    private router: Router
+
+  ) { }
 
   items!: MenuItem[];
+
+
 
   ngOnInit() {
 
@@ -29,10 +36,10 @@ export class MenuComponent implements OnInit {
       {
         label: 'Sair',
         icon: 'pi pi-sign-out',
-        routerLink: ''
       }
-
 
     ];
   }
+
 }
+

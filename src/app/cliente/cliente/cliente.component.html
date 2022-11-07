@@ -6,6 +6,11 @@
         [routerLink]="['/cliente']"></button>
 </div>
 
+<div class="flex justify-content-center">
+    <h1>
+        {{titulo}}
+    </h1>
+</div>
 
 <div class="form">
     <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
@@ -30,8 +35,8 @@
             </div>
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <p-inputMask mask="99/99/9999" [(ngModel)]="cliente.dataNasc" placeholder="99/99/9999"
-                        slotChar="dd/mm/yyyy" name="dataNasc"></p-inputMask>
+                    <p-inputMask mask="99/99/9999" [(ngModel)]="cliente.dataNasc" slotChar="dd/mm/yyyy"
+                        placeholder="99/99/9999" name="dataNasc"></p-inputMask>
                     <label for="date">Data de Nascimento</label>
                 </span>
 

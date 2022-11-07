@@ -13,6 +13,7 @@ import { ClienteService } from './../cliente.service';
 })
 export class ClienteListaComponent implements OnInit {
 
+
   loading: boolean = false
 
   totalDeRegistros: number = 0

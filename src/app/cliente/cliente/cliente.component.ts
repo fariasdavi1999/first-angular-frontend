@@ -14,13 +14,14 @@ import { ClienteService } from './../cliente.service';
   styleUrls: ['./cliente.component.css'],
   providers: [MessageService, ConfirmationService]
 })
+
 export class ClienteComponent implements OnInit {
 
   cliente: Cliente = new Cliente;
 
   clientes: Cliente[] = new Array<Cliente>();
 
-  titulo: string = 'Cadastrar usuario'
+  titulo!: string;
 
   constructor(
     private clienteService: ClienteService,
@@ -33,7 +34,6 @@ export class ClienteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
 
 
     const id: any = this.route.snapshot.params['id'];
@@ -95,6 +95,7 @@ export class ClienteComponent implements OnInit {
 
 
   getAlterar() {
+
 
     this.clienteService.getAlterar(this.cliente.id, this.cliente).subscribe(
       (response) => {
