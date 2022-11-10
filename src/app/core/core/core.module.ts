@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AccordionModule } from 'primeng/accordion';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
+import { TarefaService } from 'src/app/tarefa/tarefa.service';
 
 import { ClienteService } from './../../cliente/cliente.service';
 import { MenuComponent } from './../../components/menu/menu.component';
@@ -30,6 +31,7 @@ import { MenuComponent } from './../../components/menu/menu.component';
 
   providers: [
     ClienteService,
+    TarefaService,
     MessageService,
     ConfirmationService
   ]

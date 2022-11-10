@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ClienteModule } from './cliente/cliente.module';
 import { HomeModule } from './home/home.module';
+import { TarefaModule } from './tarefa/tarefa.module';
 
 const routes: Routes = [
 
@@ -16,8 +17,11 @@ const routes: Routes = [
 
   {
     path: 'cliente', loadChildren: () => ClienteModule
-  }
+  },
 
+  {
+    path: 'tarefa', loadChildren: () => TarefaModule
+  }
 
 ];
 
