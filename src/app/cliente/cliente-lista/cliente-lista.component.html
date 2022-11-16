@@ -10,8 +10,8 @@
 
 <div class="card ml-5 mr-5 ">
     <p-table responsiveLayout="stack" [value]="clientes" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
-        [paginator]="true" dataKey="id" [totalRecords]="totalDeRegistros" [rows]="3" [showCurrentPageReport]="true"
-        currentPageReportTemplate="Total de {totalRecords} registros">
+        [paginator]="true" dataKey="id" [totalRecords]="totalDeRegistros" [rowsPerPageOptions]="[5,10,20]"
+        [showCurrentPageReport]="true" currentPageReportTemplate="Total de {totalRecords} registros">
         <ng-template pTemplate="caption">
             Clientes
         </ng-template>
