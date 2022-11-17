@@ -10,7 +10,6 @@ import { CoreModule } from './core/core/core.module';
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     AppRoutingModule,
