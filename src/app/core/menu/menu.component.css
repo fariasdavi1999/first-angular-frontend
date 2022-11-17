@@ -1,0 +1,19 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+  /* justify-content: center; */
+
+  /* background-color: #fefefe; */
+  z-index: 999999999999997;
+}
+
+/* .btMenu {
+  position: relative;
+  top: 30%;
+} */

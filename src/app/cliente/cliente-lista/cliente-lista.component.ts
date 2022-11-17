@@ -14,7 +14,7 @@ import { ClienteService } from './../cliente.service';
 export class ClienteListaComponent implements OnInit {
 
 
-  loading: boolean = false
+  loading: boolean = true;
 
   totalDeRegistros: number = 0
 

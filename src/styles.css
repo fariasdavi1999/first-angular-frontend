@@ -3,6 +3,10 @@
   font-family: sans-serif;
 }
 
+body {
+  margin-top: 60px;
+}
+
 .aclass {
   display: flex;
   /* align-items: center;

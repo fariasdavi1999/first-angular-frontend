@@ -7,7 +7,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { TarefaService } from 'src/app/tarefa/tarefa.service';
 
 import { ClienteService } from './../../cliente/cliente.service';
-import { MenuComponent } from './../../components/menu/menu.component';
+import { MenuComponent } from '../menu/menu.component';
 
 
 

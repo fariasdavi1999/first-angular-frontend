@@ -2,7 +2,7 @@
 <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
 <div class="flex justify-content-end mr-2 mt-1">
-    <button pButton type="button" icon="pi pi-chevron-left" label="Voltar" class="right p-button-primary"
+    <button pButton type="button" icon="pi pi-chevron-left" label="Voltar" class="right p-button-primary mt-1"
         [routerLink]="['/cliente']"></button>
 </div>
 
@@ -13,21 +13,21 @@
 </div>
 
 <div class="form">
-    <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
+    <form autocomplete="on" #f="ngForm" (ngSubmit)="salvar()">
         <div class="p-fluid grid">
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <input type="text" id="inputtext" pInputText required [(ngModel)]="cliente.nomeCliente"
+                    <input type="text" id="nomeCliente" pInputText [required]="true" [(ngModel)]="cliente.nomeCliente"
                         #nomeCliente="ngModel"
                         [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && nomeCliente.invalid && (nomeCliente.dirty || nomeCliente.touched) }"
                         name="nomeCliente">
-                    <label for="inputtext">Nome Completo</label>
+                    <label for="nomeCliente">Nome Completo</label>
                 </span>
             </div>
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <p-inputMask type="text" id="cpfCliente" mask="999.999.999-99" [(ngModel)]="cliente.cpfCliente"
-                        name="cpfCliente" #cpfCliente="ngModel"
+                    <p-inputMask type="text" id="cpfCliente" [required]="true" mask="999.999.999-99"
+                        [(ngModel)]="cliente.cpfCliente" name="cpfCliente" #cpfCliente="ngModel"
                         [ngClass]="{'ng-invalid ng-dirty': f.submitted && cpfCliente.invalid && (cpfCliente.dirty || cpfCliente.touched) }">
                     </p-inputMask>
                     <label for="cpfCliente">CPF</label>
@@ -35,8 +35,8 @@
             </div>
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <p-inputMask mask="99/99/9999" [(ngModel)]="cliente.dataNasc" slotChar="dd/mm/yyyy"
-                        placeholder="99/99/9999" name="dataNasc"></p-inputMask>
+                    <p-inputMask mask="99/99/9999" [required]="true" [(ngModel)]="cliente.dataNasc"
+                        slotChar="dd/mm/yyyy" placeholder="99/99/9999" name="dataNasc"></p-inputMask>
                     <label for="date">Data de Nascimento</label>
                 </span>
 

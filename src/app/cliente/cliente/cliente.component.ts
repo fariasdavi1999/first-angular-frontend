@@ -5,7 +5,6 @@ import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/a
 
 import { Cliente } from '../cliente';
 import { ClienteService } from './../cliente.service';
-import { from } from 'rxjs';
 
 
 
