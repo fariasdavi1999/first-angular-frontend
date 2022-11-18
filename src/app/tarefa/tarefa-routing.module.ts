@@ -1,3 +1,4 @@
+import { TarefaComponent } from './tarefa/tarefa.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,6 +9,14 @@ const routes: Routes = [
 
   {
     path: '', component: TarefaListaComponent
+  },
+
+  {
+    path: 'novo-cliente', component: TarefaComponent
+  },
+
+  {
+    path: ':id', component: TarefaComponent
   }
 
 ]

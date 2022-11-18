@@ -1,1 +1,54 @@
-<p>tarefa-lista works!</p>
+<p-messages></p-messages>
+<p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+
+<div class="flex justify-content-end mt-1">
+    <button pButton label="Nova Tarefa" icon="pi pi-plus" [routerLink]="['nova-tarefa']"
+        class="right mr-2 mt-1 p-button-priamry">
+    </button>
+</div>
+
+
+<div class="card ml-5 mr-5 ">
+    <p-table [value]="tarefas" responsiveLayout="stack" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
+        [paginator]="true" dataKey="id" [totalRecords]="totalDeRegistros" [loading]="loading" [rows]="3"
+        [rowsPerPageOptions]="[3,10,20]" [showCurrentPageReport]="true" [globalFilterFields]="['clientes.nomeCliente']"
+        currentPageReportTemplate="Total de {totalRecords} registros">
+        <ng-template pTemplate="caption">
+            Tarefas
+        </ng-template>
+        <ng-template pTemplate="header" let-cols>
+            <tr>
+                <th>ID</th>
+                <th>Tarefa</th>
+                <th>Descrição</th>
+                <th>Cliente Responsável</th>
+                <th>Data de Início</th>
+                <th>Data de Conclusão</th>
+                <th>Feito</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tarefas let-cols="columns">
+            <tr>
+                <td><span class="p-column-title">ID</span> {{tarefas.id}} </td>
+                <td><span class="p-column-title">Tarefa</span> {{tarefas.nomeTarefa}} </td>
+                <td><span class="p-column-title">Descrição</span> {{tarefas.descricao}} </td>
+                <td><span class="p-column-title">Cliente Responsável</span> {{tarefas.cliente.nomeCliente}} </td>
+                <td><span class="p-column-title">Data de Início</span> {{tarefas.dataCadastro}} </td>
+                <td><span class="p-column-title">Data de Conclusão</span> {{tarefas.dataConclusao}} </td>
+                <td>
+                    <span class="p-column-title">Feito</span>
+                    <p-checkbox [(ngModel)]="tarefas.feito" [binary]="true" inputId="binary">
+                    </p-checkbox>
+                </td>
+                <!-- <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-raised p-button-primary mr-2"
+                        [routerLink]="['/tarefa', tarefas.id]"></button>
+
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-raised p-button-danger"
+                        (click)="deletar(tarefas.id)"></button>
+                </td> -->
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

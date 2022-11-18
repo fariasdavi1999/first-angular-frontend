@@ -1,3 +1,4 @@
+import { Tarefa } from './tarefa';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -10,5 +11,8 @@ export class TarefaService {
 
   constructor(private http: HttpClient) { }
 
+  listarTarefas() {
+    return this.http.get<Array<Tarefa>>(`${this.API}/listar-tarefas`);
+  }
 
 }
