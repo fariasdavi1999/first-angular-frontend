@@ -8,10 +8,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { TarefaListaComponent } from './tarefa-lista/tarefa-lista.component';
@@ -38,9 +40,11 @@ import { TarefaComponent } from './tarefa/tarefa.component';
     FormsModule,
     MessagesModule,
     MessageModule,
+    ToastModule,
     CalendarModule,
     ConfirmDialogModule,
     InputMaskModule,
+    InputTextareaModule,
     CheckboxModule
   ]
 })

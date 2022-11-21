@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, LazyLoadEvent, MessageService } from 'primeng/api';
 
 import { Tarefa } from './../tarefa';
 import { TarefaService } from './../tarefa.service';
@@ -8,7 +8,8 @@ import { TarefaService } from './../tarefa.service';
 @Component({
   selector: 'app-tarefa-lista',
   templateUrl: './tarefa-lista.component.html',
-  styleUrls: ['./tarefa-lista.component.css']
+  styleUrls: ['./tarefa-lista.component.css'],
+  providers: [MessageService, ConfirmationService]
 })
 export class TarefaListaComponent implements OnInit {
 
@@ -41,6 +42,7 @@ export class TarefaListaComponent implements OnInit {
 
     this.getTodasTarefas();
 
+
   }
 
   getTodasTarefas() {
@@ -54,12 +56,44 @@ export class TarefaListaComponent implements OnInit {
   }
 
 
-  getAlterar() {
 
+
+  deletar(id: any) {
+    this.confirmationService.confirm({
+      message: 'Deseja realmente excluir esse cliente?',
+      header: 'DELETAR',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação.' });
+        this.tarefaService.getExcluir(id)
+          .subscribe()
+
+        setTimeout(() => {
+          return window.location.reload();
+        }, 1500);
+
+
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
+            break;
+        }
+      }
+    });
   }
 
-
-
+  getExcluir(id: any) {
+    this.tarefaService.getExcluir(id).subscribe(
+      (response) => {
+        this.tarefa = { ...response }
+      }
+    )
+  }
 
   loadCustomers(event: LazyLoadEvent) {
     this.loading = true;

@@ -87,7 +87,7 @@ export class ClienteListaComponent implements OnInit {
 
         setTimeout(() => {
           return window.location.reload();
-        }, 1000);
+        }, 1500);
 
 
       },

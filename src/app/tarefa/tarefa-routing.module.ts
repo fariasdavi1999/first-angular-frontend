@@ -12,7 +12,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'novo-cliente', component: TarefaComponent
+    path: 'nova-tarefa', component: TarefaComponent
   },
 
   {

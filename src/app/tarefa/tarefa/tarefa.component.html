@@ -1,1 +1,61 @@
-<p>tarefa works!</p>
+<p-toast position="top-center"></p-toast>
+<p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+
+<div class="flex justify-content-end mt-1">
+    <button pButton icon="pi pi-chevron-left" [routerLink]="['/tarefa']" class="right mr-2 mt-1 p-button-priamry">
+    </button>
+</div>
+
+<div class="flex justify-content-center">
+    <h1>
+        {{titulo}}
+    </h1>
+</div>
+
+<div class="form">
+    <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
+        <div class="p-fluid grid justify-content-center">
+            <div class="field col-6">
+                <span class="p-float-label">
+                    <input type="text" id="nomeTarefa" pInputText [required]="true" [(ngModel)]="tarefa.nomeTarefa"
+                        #nomeTarefa="ngModel"
+                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && nomeTarefa.invalid && (nomeTarefa.dirty || nomeTarefa.touched) }"
+                        name="nomeCliente">
+                    <label for="nomeCliente">Nome da Tarefa</label>
+                </span>
+            </div>
+        </div>
+        <div class="p-fluid grid justify-content-center">
+            <div class="field col-6">
+                <span class="p-float-label">
+                    <textarea pInputTextarea type="text" id="descricao" [required]="true" [(ngModel)]="tarefa.descricao"
+                        name=" descricao" #descricao="ngModel"
+                        [ngClass]="{'ng-invalid ng-dirty': f.submitted && descricao.invalid && (descricao.dirty || descricao.touched) }">
+                </textarea>
+                    <label for="descricao">Descrição da Tarefa</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="p-fluid grid justify-content-center">
+            <div class="card field col-5">
+                <label for="nomeCliente">Cliente Responsável </label>
+                <p-dropdown [options]="clientes" [(ngModel)]="tarefa.cliente" name="nomeCliente" [filter]="false"
+                    placeholder="Selecionar cliente responsável" optionLabel="nomeCliente" [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="p-fluid grid justify-content-center">
+            <div class="card">
+                <p-checkbox [(ngModel)]="tarefa.feito" name="feito" inputId="binary" [binary]="true">
+                </p-checkbox>
+                <label for="feito">FEITO?</label>
+            </div>
+        </div>
+
+        <div class="flex justify-content-start ml-8 mt-3">
+            <button class=" p-button-success" pButton label="Salvar" [disabled]="!f.valid"></button>
+        </div>
+    </form>
+</div>

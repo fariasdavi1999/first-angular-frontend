@@ -19,7 +19,6 @@ import { MenuComponent } from '../menu/menu.component';
 
   imports: [
     CommonModule,
-
     AccordionModule,
     MenubarModule,
     HttpClientModule

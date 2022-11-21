@@ -1,6 +1,8 @@
-import { Tarefa } from './tarefa';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { Tarefa } from './tarefa';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,24 @@ export class TarefaService {
 
   listarTarefas() {
     return this.http.get<Array<Tarefa>>(`${this.API}/listar-tarefas`);
+  }
+
+  getById(id: any): Observable<Tarefa> {
+    return this.http.get<Tarefa>(`${this.API}/${id}`);
+  }
+
+  getAlterarTarefa(id: any, request: Tarefa) {
+    return this.http.put<Tarefa>(`${this.API}/${id}`, request);
+  }
+
+  getIncluir(request: Tarefa) {
+    return this.http.post<Tarefa>(this.API, request);
+  }
+
+  getExcluir(id: any) {
+
+    return this.http.delete<Tarefa>(`${this.API}/${id}`);
+
   }
 
 }

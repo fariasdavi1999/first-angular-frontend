@@ -13,6 +13,7 @@ import { MessagesModule } from 'primeng/messages';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
+import { ToastModule } from 'primeng/toast';
 
 import { ClienteListaComponent } from './cliente-lista/cliente-lista.component';
 import { ClienteRoutingModule } from './cliente-routing.module';
@@ -37,6 +38,7 @@ import { ClienteComponent } from './cliente/cliente.component';
     FormsModule,
     MessagesModule,
     MessageModule,
+    ToastModule,
     CalendarModule,
     ConfirmDialogModule,
     InputMaskModule,

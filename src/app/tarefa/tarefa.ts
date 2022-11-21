@@ -5,6 +5,6 @@ export class Tarefa {
     descricao!: string;
     feito!: boolean;
     dataCadastro!: string;
-    dataConclusao!: string;
-    cliente!: Cliente;
+    dataConclusao?: string;
+    cliente = new Array<Cliente>();
 }

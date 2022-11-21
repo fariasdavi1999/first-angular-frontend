@@ -1,4 +1,4 @@
-<p-messages></p-messages>
+<p-toast position="top-center"></p-toast>
 <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
 <div class="flex justify-content-end mr-2 mt-1">
@@ -13,7 +13,7 @@
 </div>
 
 <div class="form">
-    <form autocomplete="on" #f="ngForm" (ngSubmit)="salvar()">
+    <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
         <div class="p-fluid grid">
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">

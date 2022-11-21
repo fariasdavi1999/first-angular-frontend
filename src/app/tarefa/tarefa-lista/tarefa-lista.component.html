@@ -1,4 +1,4 @@
-<p-messages></p-messages>
+<p-toast position="top-center"></p-toast>
 <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
 <div class="flex justify-content-end mt-1">
@@ -25,6 +25,7 @@
                 <th>Data de Início</th>
                 <th>Data de Conclusão</th>
                 <th>Feito</th>
+                <th>Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-tarefas let-cols="columns">
@@ -37,16 +38,16 @@
                 <td><span class="p-column-title">Data de Conclusão</span> {{tarefas.dataConclusao}} </td>
                 <td>
                     <span class="p-column-title">Feito</span>
-                    <p-checkbox [(ngModel)]="tarefas.feito" [binary]="true" inputId="binary">
+                    <p-checkbox [(ngModel)]="tarefas.feito" [disabled]="true" [binary]="true" inputId="binary">
                     </p-checkbox>
                 </td>
-                <!-- <td>
+                <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-raised p-button-primary mr-2"
                         [routerLink]="['/tarefa', tarefas.id]"></button>
 
                     <button pButton pRipple icon="pi pi-trash" class="p-button-raised p-button-danger"
                         (click)="deletar(tarefas.id)"></button>
-                </td> -->
+                </td>
             </tr>
         </ng-template>
     </p-table>

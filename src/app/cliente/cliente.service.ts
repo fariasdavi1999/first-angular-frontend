@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Tarefa } from '../tarefa/tarefa';
 
 import { Cliente } from './cliente';
 
@@ -17,6 +18,10 @@ export class ClienteService {
 
     return this.http.get<Array<Cliente>>(`${this.API}/listar-clientes`);
 
+  }
+
+  getByCpf(cpfCliente: string): Observable<Cliente> {
+    return this.http.get<Cliente>(`${this.API}/cpf/${cpfCliente}`)
   }
 
   getById(id: any): Observable<Cliente> {
