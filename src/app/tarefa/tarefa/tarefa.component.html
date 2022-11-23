@@ -2,7 +2,8 @@
 <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
 <div class="flex justify-content-end mt-1">
-    <button pButton icon="pi pi-chevron-left" [routerLink]="['/tarefa']" class="right mr-2 mt-1 p-button-priamry">
+    <button pButton icon="pi pi-chevron-left" label="Voltar" [routerLink]="['/tarefa']"
+        class="right mr-2 mt-1 p-button-priamry">
     </button>
 </div>
 
@@ -20,8 +21,8 @@
                     <input type="text" id="nomeTarefa" pInputText [required]="true" [(ngModel)]="tarefa.nomeTarefa"
                         #nomeTarefa="ngModel"
                         [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && nomeTarefa.invalid && (nomeTarefa.dirty || nomeTarefa.touched) }"
-                        name="nomeCliente">
-                    <label for="nomeCliente">Nome da Tarefa</label>
+                        name="nomeTarefa">
+                    <label for="nomeTarefa">Nome da Tarefa</label>
                 </span>
             </div>
         </div>
@@ -29,9 +30,9 @@
             <div class="field col-6">
                 <span class="p-float-label">
                     <textarea pInputTextarea type="text" id="descricao" [required]="true" [(ngModel)]="tarefa.descricao"
-                        name=" descricao" #descricao="ngModel"
+                        name="descricao" #descricao="ngModel"
                         [ngClass]="{'ng-invalid ng-dirty': f.submitted && descricao.invalid && (descricao.dirty || descricao.touched) }">
-                </textarea>
+                    </textarea>
                     <label for="descricao">Descrição da Tarefa</label>
                 </span>
             </div>
@@ -54,7 +55,7 @@
             </div>
         </div>
 
-        <div class="flex justify-content-start ml-8 mt-3">
+        <div class="grid p-fluid mt-3 m-8">
             <button class=" p-button-success" pButton label="Salvar" [disabled]="!f.valid"></button>
         </div>
     </form>

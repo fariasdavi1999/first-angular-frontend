@@ -17,6 +17,10 @@ const routes: Routes = [
 
   {
     path: ':id', component: TarefaComponent
+  },
+
+  {
+    path: 'feito/:feito', component: TarefaListaComponent
   }
 
 ]

@@ -3,7 +3,7 @@
 
 <div class="flex justify-content-end mt-1">
     <button pButton label="Nova Tarefa" icon="pi pi-plus" [routerLink]="['nova-tarefa']"
-        class="right mr-2 mt-1 p-button-priamry">
+        class="right mr-2 mt-1 p-button">
     </button>
 </div>
 
@@ -11,10 +11,11 @@
 <div class="card ml-5 mr-5 ">
     <p-table [value]="tarefas" responsiveLayout="stack" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
         [paginator]="true" dataKey="id" [totalRecords]="totalDeRegistros" [loading]="loading" [rows]="3"
-        [rowsPerPageOptions]="[3,10,20]" [showCurrentPageReport]="true" [globalFilterFields]="['clientes.nomeCliente']"
+        [rowsPerPageOptions]="[3,10,20]" [showCurrentPageReport]="true"
+        [globalFilterFields]="['tarefas', 'tarefas.nomeTarefa', 'tarefas.feito']" [rowHover]="true"
         currentPageReportTemplate="Total de {totalRecords} registros">
         <ng-template pTemplate="caption">
-            Tarefas
+            <h4>Tarefas</h4>
         </ng-template>
         <ng-template pTemplate="header" let-cols>
             <tr>
@@ -24,7 +25,8 @@
                 <th>Cliente Responsável</th>
                 <th>Data de Início</th>
                 <th>Data de Conclusão</th>
-                <th>Feito</th>
+                <th pSortableColumn="feito">Feito <p-sortIcon field="feito"></p-sortIcon>
+                </th>
                 <th>Ações</th>
             </tr>
         </ng-template>

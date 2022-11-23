@@ -14,8 +14,8 @@
 
 <div class="form">
     <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
-        <div class="p-fluid grid">
-            <div class="field col-12 md:col-6">
+        <div class="p-fluid grid justify-content-center">
+            <div class="field col-6">
                 <span class="p-float-label">
                     <input type="text" id="nomeCliente" pInputText [required]="true" [(ngModel)]="cliente.nomeCliente"
                         #nomeCliente="ngModel"
@@ -24,7 +24,9 @@
                     <label for="nomeCliente">Nome Completo</label>
                 </span>
             </div>
-            <div class="field col-12 md:col-6">
+        </div>
+        <div class="p-fluid grid justify-content-center">
+            <div class="field col-4">
                 <span class="p-float-label">
                     <p-inputMask type="text" id="cpfCliente" [required]="true" mask="999.999.999-99"
                         [(ngModel)]="cliente.cpfCliente" name="cpfCliente" #cpfCliente="ngModel"
@@ -33,19 +35,20 @@
                     <label for="cpfCliente">CPF</label>
                 </span>
             </div>
-            <div class="field col-12 md:col-6">
+        </div>
+        <div class="p-fluid grid justify-content-center">
+            <div class="field col-4">
                 <span class="p-float-label">
                     <p-inputMask mask="99/99/9999" [required]="true" [(ngModel)]="cliente.dataNasc"
                         slotChar="dd/mm/yyyy" placeholder="99/99/9999" name="dataNasc"></p-inputMask>
                     <label for="date">Data de Nascimento</label>
                 </span>
-
                 <!-- <input id="date" type="date" pInputText required [(ngModel)]="cliente.dataNasc" name="something"
-                    #dataNasc="ngModel"
-                    [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && dataNasc.invalid && (dataNasc.dirty || dataNasc.touched) }"> -->
+                        #dataNasc="ngModel"
+                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && dataNasc.invalid && (dataNasc.dirty || dataNasc.touched) }"> -->
             </div>
         </div>
-        <div class="flex justify-content-start mr-2 mt-1">
+        <div class="grid p-fluid mt-3 m-8">
             <button class=" p-button-success" pButton label="Salvar" [disabled]="!f.valid"></button>
         </div>
         <ngx-qrcode class="flex justify-content-center" [elementType]="elementType"

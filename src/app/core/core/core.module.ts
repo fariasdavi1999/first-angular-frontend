@@ -6,13 +6,12 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { TarefaService } from 'src/app/tarefa/tarefa.service';
 
-import { ClienteService } from './../../cliente/cliente.service';
 import { MenuComponent } from '../menu/menu.component';
+import { ClienteService } from './../../cliente/cliente.service';
 
 
 
 @NgModule({
-
   declarations: [
     MenuComponent
   ],

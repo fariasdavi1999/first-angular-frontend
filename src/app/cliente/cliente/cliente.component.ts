@@ -21,7 +21,7 @@ export class ClienteComponent implements OnInit {
 
   clientes: Cliente[] = new Array<Cliente>();
 
-  titulo: string = 'Cadastrar Usuário';
+  titulo: string = 'Cadastrar Cliente';
 
   constructor(
     private clienteService: ClienteService,
@@ -43,7 +43,7 @@ export class ClienteComponent implements OnInit {
     }
 
     if (id) {
-      this.titulo = 'Alterar Usuário'
+      this.titulo = 'Alterar Cliente'
       this.getCliente(id);
     }
 
@@ -104,7 +104,7 @@ export class ClienteComponent implements OnInit {
 
     this.clienteService.getAlterar(this.cliente.id, this.cliente).subscribe(
       (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Alteração ', detail: 'Cliente alterada com sucesso!' });
+        this.messageService.add({ severity: 'success', summary: 'Alteração ', detail: 'Cliente alterado com sucesso!' });
 
         setTimeout(() => {
           this.router.navigate(['/cliente'])
@@ -120,7 +120,7 @@ export class ClienteComponent implements OnInit {
 
     this.clienteService.getIncluir(this.cliente).subscribe(
       (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Inclusão ', detail: 'Cliente incluida com sucesso!' })
+        this.messageService.add({ severity: 'success', summary: 'Inclusão ', detail: 'Cliente incluido com sucesso!' })
         setTimeout(() => {
           this.router.navigate(['/cliente'])
         }, 1500);

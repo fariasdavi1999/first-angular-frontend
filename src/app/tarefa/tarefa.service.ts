@@ -21,6 +21,10 @@ export class TarefaService {
     return this.http.get<Tarefa>(`${this.API}/${id}`);
   }
 
+  getByFeito(feito: boolean): Observable<Tarefa> {
+    return this.http.get<Tarefa>(`${this.API}/feito/${feito}`)
+  }
+
   getAlterarTarefa(id: any, request: Tarefa) {
     return this.http.put<Tarefa>(`${this.API}/${id}`, request);
   }

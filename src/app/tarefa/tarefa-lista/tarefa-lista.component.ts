@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationService, ConfirmEventType, LazyLoadEvent, MessageService } from 'primeng/api';
 
 import { Tarefa } from './../tarefa';
@@ -33,12 +33,18 @@ export class TarefaListaComponent implements OnInit {
     private confirmationService: ConfirmationService,
 
     private router: Router,
+    private route: ActivatedRoute
 
 
   ) { }
 
   ngOnInit(): void {
 
+    let feito: boolean = this.route.snapshot.params['feito'];
+
+    if (feito) {
+      this.getTarefaFeita(feito);
+    }
 
     this.getTodasTarefas();
 
@@ -55,25 +61,28 @@ export class TarefaListaComponent implements OnInit {
     )
   }
 
-
-
+  getTarefaFeita(feito: boolean) {
+    this.tarefaService.getByFeito(feito).subscribe(
+      (response) => {
+        this.tarefa = { ...response }
+      }
+    )
+  }
 
   deletar(id: any) {
     this.confirmationService.confirm({
       message: 'Deseja realmente excluir esse cliente?',
       header: 'DELETAR',
       icon: 'pi pi-exclamation-triangle',
+
       accept: () => {
         this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação.' });
-        this.tarefaService.getExcluir(id)
-          .subscribe()
-
+        this.tarefaService.getExcluir(id).subscribe()
         setTimeout(() => {
           return window.location.reload();
-        }, 1500);
-
-
+        }, 1300);
       },
+
       reject: (type: any) => {
         switch (type) {
           case ConfirmEventType.REJECT:
