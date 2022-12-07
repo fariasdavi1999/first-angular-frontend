@@ -1,7 +1,7 @@
 <p-toast position="top-center"></p-toast>
 <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
-<div class="flex justify-content-end mt-1">
+<div class="grid p-fluid mt-3 m-8">
     <button pButton label="Novo Cliente" icon="pi pi-plus" [routerLink]="['novo-cliente']"
         class="right mr-2 mt-1 p-button-priamry">
     </button>
@@ -11,8 +11,8 @@
 <div class="card ml-5 mr-5 ">
     <p-table [value]="clientes" responsiveLayout="stack" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
         [paginator]="true" dataKey="id" [totalRecords]="totalDeRegistros" [loading]="loading" [rows]="3"
-        [rowsPerPageOptions]="[3,10,20]" [showCurrentPageReport]="true" [globalFilterFields]="['clientes.nomeCliente']"
-        currentPageReportTemplate="Total de {totalRecords} registros">
+        [rowHover]="true" [rowsPerPageOptions]="[3,10,20]" [showCurrentPageReport]="true"
+        [globalFilterFields]="['clientes.nomeCliente']" currentPageReportTemplate="Total de {totalRecords} registros">
         <ng-template pTemplate="caption">
             Clientes
         </ng-template>

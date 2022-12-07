@@ -1,7 +1,7 @@
 <p-toast position="top-center"></p-toast>
 <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
-<div class="flex justify-content-end mt-1">
+<div class="grid p-fluid mt-3 m-8">
     <button pButton label="Nova Tarefa" icon="pi pi-plus" [routerLink]="['nova-tarefa']"
         class="right mr-2 mt-1 p-button">
     </button>
@@ -25,7 +25,7 @@
                 <th>Cliente Responsável</th>
                 <th>Data de Início</th>
                 <th>Data de Conclusão</th>
-                <th pSortableColumn="feito">Feito <p-sortIcon field="feito"></p-sortIcon>
+                <th pSortableColumn="feito"> Feito <p-sortIcon field="feito"></p-sortIcon>
                 </th>
                 <th>Ações</th>
             </tr>

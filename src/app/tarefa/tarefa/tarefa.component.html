@@ -1,7 +1,7 @@
 <p-toast position="top-center"></p-toast>
 <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
-<div class="flex justify-content-end mt-1">
+<div class="grid p-fluid mt-3 m-8">
     <button pButton icon="pi pi-chevron-left" label="Voltar" [routerLink]="['/tarefa']"
         class="right mr-2 mt-1 p-button-priamry">
     </button>
@@ -16,7 +16,7 @@
 <div class="form">
     <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
         <div class="p-fluid grid justify-content-center">
-            <div class="field col-6">
+            <div class="field col-8">
                 <span class="p-float-label">
                     <input type="text" id="nomeTarefa" pInputText [required]="true" [(ngModel)]="tarefa.nomeTarefa"
                         #nomeTarefa="ngModel"
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="p-fluid grid justify-content-center">
-            <div class="field col-6">
+            <div class="field col-8">
                 <span class="p-float-label">
                     <textarea pInputTextarea type="text" id="descricao" [required]="true" [(ngModel)]="tarefa.descricao"
                         name="descricao" #descricao="ngModel"
@@ -39,7 +39,7 @@
         </div>
 
         <div class="p-fluid grid justify-content-center">
-            <div class="card field col-5">
+            <div class="card field col-8">
                 <label for="nomeCliente">Cliente Responsável </label>
                 <p-dropdown [options]="clientes" [(ngModel)]="tarefa.cliente" name="nomeCliente" [filter]="false"
                     placeholder="Selecionar cliente responsável" optionLabel="nomeCliente" [showClear]="true">

@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Tarefa } from './tarefa';
 
@@ -25,6 +25,10 @@ export class TarefaService {
     return this.http.get<Tarefa>(`${this.API}/feito/${feito}`)
   }
 
+  // getByFeito(feito: boolean) {
+  //   return this.http.get<Array<Tarefa>>(`${this.API}/feito/${feito}`);
+  // }
+
   getAlterarTarefa(id: any, request: Tarefa) {
     return this.http.put<Tarefa>(`${this.API}/${id}`, request);
   }
@@ -34,9 +38,7 @@ export class TarefaService {
   }
 
   getExcluir(id: any) {
-
     return this.http.delete<Tarefa>(`${this.API}/${id}`);
-
   }
 
 }

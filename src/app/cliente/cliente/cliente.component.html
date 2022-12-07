@@ -1,7 +1,7 @@
 <p-toast position="top-center"></p-toast>
 <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
-<div class="flex justify-content-end mr-2 mt-1">
+<div class="grid p-fluid mt-3 m-8">
     <button pButton type="button" icon="pi pi-chevron-left" label="Voltar" class="right p-button-primary mt-1"
         [routerLink]="['/cliente']"></button>
 </div>
@@ -15,7 +15,7 @@
 <div class="form">
     <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
         <div class="p-fluid grid justify-content-center">
-            <div class="field col-6">
+            <div class="field col-8">
                 <span class="p-float-label">
                     <input type="text" id="nomeCliente" pInputText [required]="true" [(ngModel)]="cliente.nomeCliente"
                         #nomeCliente="ngModel"
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="p-fluid grid justify-content-center">
-            <div class="field col-4">
+            <div class="field col-8">
                 <span class="p-float-label">
                     <p-inputMask type="text" id="cpfCliente" [required]="true" mask="999.999.999-99"
                         [(ngModel)]="cliente.cpfCliente" name="cpfCliente" #cpfCliente="ngModel"
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="p-fluid grid justify-content-center">
-            <div class="field col-4">
+            <div class="field col-8">
                 <span class="p-float-label">
                     <p-inputMask mask="99/99/9999" [required]="true" [(ngModel)]="cliente.dataNasc"
                         slotChar="dd/mm/yyyy" placeholder="99/99/9999" name="dataNasc"></p-inputMask>

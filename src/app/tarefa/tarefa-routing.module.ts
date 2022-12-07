@@ -20,7 +20,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'feito/:feito', component: TarefaListaComponent
+    path: ':feito', component: TarefaListaComponent
   }
 
 ]

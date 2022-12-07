@@ -69,8 +69,6 @@ export class ClienteListaComponent implements OnInit {
         this.totalDeRegistros = response.length
       }
     )
-
-
   }
 
 
@@ -82,9 +80,7 @@ export class ClienteListaComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação.' });
-        this.clienteService.getExcluir(id)
-          .subscribe()
-
+        this.clienteService.getExcluir(id).subscribe()
         setTimeout(() => {
           return window.location.reload();
         }, 1500);
