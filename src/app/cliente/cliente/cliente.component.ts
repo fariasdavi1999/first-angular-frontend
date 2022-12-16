@@ -107,7 +107,9 @@ export class ClienteComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Alteração ', detail: 'Cliente alterado com sucesso!' });
 
         setTimeout(() => {
-          this.router.navigate(['/cliente'])
+          this.router.navigate(['/cliente']).then(
+            () => window.location.reload()
+          )
         }, 1300);
       }, (erro) => {
         console.log(erro);
