@@ -31,7 +31,7 @@
     {
       "name": "api-agenda",
       "urls": [
-        "http://localhost:8080/api/*"
+        "/**"
       ],
       "cacheConfig": {
         "strategy": "freshness",
