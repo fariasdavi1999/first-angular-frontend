@@ -1,26 +1,29 @@
-import { ClienteService } from './../../cliente/cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
+import { PushNotificationService } from 'ng-push-notification';
+import {
+  ConfirmationService,
+  ConfirmEventType,
+  MessageService,
+} from 'primeng/api';
 import { TarefaService } from 'src/app/tarefa/tarefa.service';
 
 import { Cliente } from './../../cliente/cliente';
+import { ClienteService } from './../../cliente/cliente.service';
 import { Tarefa } from './../tarefa';
-
 
 @Component({
   selector: 'app-tarefa',
   templateUrl: './tarefa.component.html',
   styleUrls: ['./tarefa.component.css'],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService],
 })
 export class TarefaComponent implements OnInit {
-
-  tarefa: Tarefa = new Tarefa;
+  tarefa: Tarefa = new Tarefa();
 
   tarefas: Tarefa[] = new Array<Tarefa>();
 
-  clientes: Cliente[] = new Array<Cliente>;
+  clientes: Cliente[] = new Array<Cliente>();
 
   titulo: string = 'Cadastrar Tarefa';
 
@@ -32,12 +35,12 @@ export class TarefaComponent implements OnInit {
     private confirmationService: ConfirmationService,
 
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
 
+    private pushNotification: PushNotificationService
+  ) {}
 
   ngOnInit(): void {
-
     const id: any = this.route.snapshot.params['id'];
 
     if (id) {
@@ -46,94 +49,108 @@ export class TarefaComponent implements OnInit {
     }
 
     this.getClientes();
-
   }
 
   getClientes() {
-    this.clienteService.listarTodos().subscribe(
-      (response) => {
-        this.clientes = [...response]
-      }
-    )
+    this.clienteService.listarTodos().subscribe((response) => {
+      this.clientes = [...response];
+    });
   }
 
   getTarefas() {
-    this.tarefaService.listarTarefas().subscribe(
-      (response) => {
-        this.tarefas = [...response]
-      }
-    )
+    this.tarefaService.listarTarefas().subscribe((response) => {
+      this.tarefas = [...response];
+    });
   }
 
   getTarefa(id: any) {
-    this.tarefaService.getById(id).subscribe(
-      (response) => {
-        this.tarefa = { ...response }
-      }
-    )
+    this.tarefaService.getById(id).subscribe((response) => {
+      this.tarefa = { ...response };
+    });
   }
 
-
   getIsEditando() {
-    return Boolean(this.tarefa.id)
+    return Boolean(this.tarefa.id);
   }
 
   salvar() {
-
     this.confirmationService.confirm({
       message: 'Deseja realmente salvar essa tarefa?',
       header: 'Confirmação',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-
         if (this.getIsEditando()) {
-          this.getAlterar()
+          this.getAlterar();
         } else {
-          this.getIncluir()
+          this.getIncluir();
         }
-
       },
       reject: (type: any) => {
         switch (type) {
           case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Rejeitado',
+              detail: 'Você rejeitou a operação.',
+            });
             break;
           case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'Cancelado',
+              detail: 'Você cancelou a operação.',
+            });
             break;
         }
-      }
+      },
     });
   }
 
   getIncluir() {
     this.tarefaService.getIncluir(this.tarefa).subscribe(
       (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Inclusão ', detail: 'Tarefa incluida com sucesso!' })
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Inclusão ',
+          detail: 'Tarefa incluida com sucesso!',
+        });
         setTimeout(() => {
-          this.router.navigate(['/tarefa'])
+          this.router.navigate(['/tarefa']).then(
+            () =>
+              new Notification('NOVA TAREFA', {
+                icon: 'https://miro.medium.com/max/1400/1*R1mfXLP9edcArZXwmGbGag.jpeg',
+                body: 'Tarefa Adicionada!',
+                lang: 'pt-BR',
+                dir: 'auto',
+                timestamp: Date.now(),
+                vibrate: [100, 50, 100],
+              })
+          );
         }, 1500);
-      }, (erro) => {
+      },
+      (erro) => {
         console.log(erro);
       }
-    )
+    );
   }
 
   getAlterar() {
-
     this.tarefaService.getAlterarTarefa(this.tarefa.id, this.tarefa).subscribe(
       (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Alteração ', detail: 'Tarefa alterada com sucesso!' });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Alteração ',
+          detail: 'Tarefa alterada com sucesso!',
+        });
         setTimeout(() => {
-          this.router.navigate(['/tarefa']).then(
-            () => window.location.reload()
-          )
+          this.router
+            .navigate(['/tarefa'])
+            .then(() => window.location.reload());
         }, 1400);
-      }, (erro) => {
+      },
+      (erro) => {
         console.log(erro);
       }
-    )
+    );
   }
-
-
 }

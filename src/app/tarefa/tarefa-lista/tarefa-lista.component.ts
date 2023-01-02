@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ConfirmationService, ConfirmEventType, LazyLoadEvent, MessageService } from 'primeng/api';
+import {
+  ConfirmationService,
+  ConfirmEventType,
+  LazyLoadEvent,
+  MessageService,
+} from 'primeng/api';
 
 import { Tarefa } from './../tarefa';
 import { TarefaService } from './../tarefa.service';
@@ -9,24 +14,22 @@ import { TarefaService } from './../tarefa.service';
   selector: 'app-tarefa-lista',
   templateUrl: './tarefa-lista.component.html',
   styleUrls: ['./tarefa-lista.component.css'],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService],
 })
 export class TarefaListaComponent implements OnInit {
-
   loading: boolean = true;
 
   checked: boolean = false;
 
-  totalDeRegistros: number = 0
+  totalDeRegistros: number = 0;
 
   tarefas: Tarefa[] = [];
 
   tarefasLazyLoad: Tarefa[] = new Array<Tarefa>();
 
-  tarefa: Tarefa = new Tarefa;
+  tarefa: Tarefa = new Tarefa();
 
   constructor(
-
     private tarefaService: TarefaService,
 
     private messageService: MessageService,
@@ -34,12 +37,9 @@ export class TarefaListaComponent implements OnInit {
 
     private router: Router,
     private route: ActivatedRoute
-
-
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     let feito: boolean = this.route.snapshot.params['feito'];
 
     if (feito) {
@@ -47,26 +47,20 @@ export class TarefaListaComponent implements OnInit {
     }
 
     this.getTodasTarefas();
-
-
   }
 
   getTodasTarefas() {
-    this.tarefaService.listarTarefas().subscribe(
-      (response) => {
-        this.tarefas = [...response]
-        this.tarefasLazyLoad = [...response]
-        this.totalDeRegistros = response.length
-      }
-    )
+    this.tarefaService.listarTarefas().subscribe((response) => {
+      this.tarefas = [...response];
+      this.tarefasLazyLoad = [...response];
+      this.totalDeRegistros = response.length;
+    });
   }
 
   getTarefaFeita(feito: boolean) {
-    this.tarefaService.getByFeito(feito).subscribe(
-      (response) => {
-        this.tarefa = { ...response }
-      }
-    )
+    this.tarefaService.getByFeito(feito).subscribe((response) => {
+      this.tarefa = { ...response };
+    });
   }
 
   deletar(id: any) {
@@ -76,32 +70,42 @@ export class TarefaListaComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação.' });
-        this.tarefaService.getExcluir(id).subscribe()
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Confirmado',
+          detail: 'Você confirmou a operação.',
+        });
+        this.tarefaService.getExcluir(id).subscribe();
         setTimeout(() => {
           return window.location.reload();
-        }, 1300);
+        }, 1100);
       },
 
       reject: (type: any) => {
         switch (type) {
           case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Rejeitado',
+              detail: 'Você rejeitou a operação.',
+            });
             break;
           case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'Cancelado',
+              detail: 'Você cancelou a operação.',
+            });
             break;
         }
-      }
+      },
     });
   }
 
   getExcluir(id: any) {
-    this.tarefaService.getExcluir(id).subscribe(
-      (response) => {
-        this.tarefa = { ...response }
-      }
-    )
+    this.tarefaService.getExcluir(id).subscribe((response) => {
+      this.tarefa = { ...response };
+    });
   }
 
   loadCustomers(event: LazyLoadEvent) {
@@ -109,15 +113,14 @@ export class TarefaListaComponent implements OnInit {
 
     setTimeout(() => {
       if (this.tarefas) {
-
-        let numPrimeiraLinha: number = Number(event.first)
-        let numLinhasPagina: number = (numPrimeiraLinha + Number(event.rows))
-        this.tarefas = [...this.tarefasLazyLoad.slice(numPrimeiraLinha, numLinhasPagina)];
+        let numPrimeiraLinha: number = Number(event.first);
+        let numLinhasPagina: number = numPrimeiraLinha + Number(event.rows);
+        this.tarefas = [
+          ...this.tarefasLazyLoad.slice(numPrimeiraLinha, numLinhasPagina),
+        ];
 
         this.loading = false;
       }
     }, 500);
-
   }
-
 }
