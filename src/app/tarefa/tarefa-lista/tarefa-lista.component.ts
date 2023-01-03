@@ -65,7 +65,7 @@ export class TarefaListaComponent implements OnInit {
 
   deletar(id: any) {
     this.confirmationService.confirm({
-      message: 'Deseja realmente excluir esse cliente?',
+      message: 'Deseja realmente excluir essa tarefa?',
       header: 'DELETAR',
       icon: 'pi pi-exclamation-triangle',
 

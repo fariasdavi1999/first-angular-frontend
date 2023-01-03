@@ -48,6 +48,9 @@ THE SOFTWARE.
 encode-utf8
 MIT
 
+ng-push-notification
+MIT
+
 primeflex
 MIT
 
