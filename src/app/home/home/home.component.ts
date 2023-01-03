@@ -10,13 +10,7 @@ import { registerLocaleData } from '@angular/common';
 export class HomeComponent implements OnInit {
   constructor(private pushNotification: PushNotificationService) {}
 
-  ngOnInit(): void {
-    navigator.serviceWorker.ready.then((res) => {
-      res.getNotifications().then((res) => {
-        window.open('https://primeiro-frontend-angular.vercel.app');
-      });
-    });
-  }
+  ngOnInit(): void {}
 
   //através de service worker, no inspecionar falou pra usar service worker pra notificar no celular
   notificar() {
