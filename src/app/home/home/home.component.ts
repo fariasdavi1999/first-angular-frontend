@@ -1,5 +1,6 @@
 import { PushNotificationService } from 'ng-push-notification';
 import { Component, OnInit } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   constructor(private pushNotification: PushNotificationService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    navigator.serviceWorker.ready.then((res) => {
+      res.getNotifications().then((res) => {
+        window.open('https://primeiro-frontend-angular.vercel.app');
+      });
+    });
+  }
 
   //através de service worker, no inspecionar falou pra usar service worker pra notificar no celular
   notificar() {
