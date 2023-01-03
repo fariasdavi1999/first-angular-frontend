@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit {
             vibrate: [100, 50, 100],
             actions: [
               {
-                action:
-                  'https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification',
+                icon: 'dist/app-angular/assets/icons/icon-72x72.png',
+                action: 'https://primeiro-frontend-angular.vercel.app',
                 title: 'Abrir',
               },
             ],
