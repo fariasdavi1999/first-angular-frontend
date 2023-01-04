@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  //através de service worker, no inspecionar(f12) falou pra usar service worker pra notificar no celular
+  //através de service worker, no inspecionar(f12) falou pra usar service worker pra notificar no celular(android)
   notificar() {
     Notification.requestPermission((result) => {
       if (result === 'granted') {
@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
             timestamp: Date.now(),
             vibrate: [100, 50, 100],
             data: 'https://primeiro-frontend-angular.vercel.app',
+            requireInteraction: true,
             actions: [
               {
                 icon: '',
