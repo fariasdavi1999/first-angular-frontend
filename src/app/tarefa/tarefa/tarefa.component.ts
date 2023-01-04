@@ -11,6 +11,7 @@ import { TarefaService } from 'src/app/tarefa/tarefa.service';
 import { Cliente } from './../../cliente/cliente';
 import { ClienteService } from './../../cliente/cliente.service';
 import { Tarefa } from './../tarefa';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-tarefa',
@@ -37,7 +38,8 @@ export class TarefaComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
 
-    private pushNotification: PushNotificationService
+    private pushNotification: PushNotificationService,
+    private swPush: SwPush
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,11 @@ export class TarefaComponent implements OnInit {
     }
 
     this.getClientes();
+
+    //quando a notificacao chegar permite abrir a janela com uma ação
+    this.swPush.notificationClicks.subscribe(({ action, notification }) => {
+      window.open(notification.data.url);
+    });
   }
 
   getClientes() {
@@ -120,15 +127,18 @@ export class TarefaComponent implements OnInit {
               if (result === 'granted') {
                 navigator.serviceWorker.ready.then((reg) => {
                   reg.showNotification('NOVA TAREFA', {
-                    icon: 'assets/icons/icon-96x96.png',
+                    icon: '/assets/icons/icon-72x72.png',
                     body: 'Tarefa Adicionada!',
                     lang: 'pt-BR',
                     // dir: 'auto',
                     timestamp: Date.now(),
                     vibrate: [100, 50, 100],
+                    data: {
+                      url: 'https://primeiro-frontend-angular.vercel.app',
+                    },
                     actions: [
                       {
-                        icon: '/assets/icons/icon-72x72.png',
+                        icon: '',
                         action: 'https://primeiro-frontend-angular.vercel.app',
                         title: 'Abrir',
                       },

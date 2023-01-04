@@ -1,3 +1,4 @@
+import { SwPush } from '@angular/service-worker';
 import { PushNotificationService } from 'ng-push-notification';
 import { Component, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
@@ -8,9 +9,17 @@ import { registerLocaleData } from '@angular/common';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private pushNotification: PushNotificationService) {}
+  constructor(
+    private pushNotification: PushNotificationService,
+    private swPush: SwPush
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //quando a notificacao chegar permite abrir a janela com uma ação
+    this.swPush.notificationClicks.subscribe(({ action, notification }) => {
+      window.open(notification.data.url);
+    });
+  }
 
   //através de service worker, no inspecionar(f12) falou pra usar service worker pra notificar no celular
   notificar() {
@@ -24,6 +33,9 @@ export class HomeComponent implements OnInit {
             // dir: 'auto',
             timestamp: Date.now(),
             vibrate: [100, 50, 100],
+            data: {
+              url: 'https://primeiro-frontend-angular.vercel.app',
+            },
             actions: [
               {
                 icon: '/assets/icons/icon-72x72.png',
