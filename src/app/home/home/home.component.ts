@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
 import { PushNotificationService } from 'ng-push-notification';
@@ -10,13 +11,16 @@ import { PushNotificationService } from 'ng-push-notification';
 export class HomeComponent implements OnInit {
   constructor(
     private pushNotification: PushNotificationService,
-    private swPush: SwPush
+    private swPush: SwPush,
+
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     //quando a notificacao chegar permite abrir a janela com uma ação
     this.swPush.notificationClicks.subscribe(({ notification }) => {
-      window.open(notification.data);
+      // window.open(notification.data);
+      this.router.navigateByUrl('https://primeiro-frontend-angular.vercel.app');
     });
   }
 
