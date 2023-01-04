@@ -20,14 +20,7 @@ export class HomeComponent implements OnInit {
     //quando a notificacao chegar permite abrir a janela com uma ação
     this.swPush.notificationClicks.subscribe(({ notification }) => {
       // window.open(notification.data);
-      this.router
-        .navigateByUrl(`https://primeiro-frontend-angular.vercel.app`)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((erro) => {
-          console.log(JSON.stringify(erro));
-        });
+      this.router.navigateByUrl(`https://primeiro-frontend-angular.vercel.app`);
     });
   }
 
