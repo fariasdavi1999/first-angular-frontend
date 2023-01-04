@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  //através de service worker, no inspecionar falou pra usar service worker pra notificar no celular
+  //através de service worker, no inspecionar(f12) falou pra usar service worker pra notificar no celular
   notificar() {
     Notification.requestPermission((result) => {
       if (result === 'granted') {

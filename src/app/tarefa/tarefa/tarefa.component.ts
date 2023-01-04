@@ -115,16 +115,28 @@ export class TarefaComponent implements OnInit {
           detail: 'Tarefa incluida com sucesso!',
         });
         setTimeout(() => {
-          this.router.navigate(['/tarefa']).then(
-            () =>
-              new Notification('NOVA TAREFA', {
-                icon: 'https://miro.medium.com/max/1400/1*R1mfXLP9edcArZXwmGbGag.jpeg',
-                body: 'Tarefa Adicionada!',
-                lang: 'pt-BR',
-                dir: 'auto',
-                timestamp: Date.now(),
-                vibrate: [100, 50, 100],
-              })
+          this.router.navigate(['/tarefa']).then(() =>
+            Notification.requestPermission((result) => {
+              if (result === 'granted') {
+                navigator.serviceWorker.ready.then((reg) => {
+                  reg.showNotification('NOVA TAREFA', {
+                    icon: 'assets/icons/icon-96x96.png',
+                    body: 'Tarefa Adicionada!',
+                    lang: 'pt-BR',
+                    // dir: 'auto',
+                    timestamp: Date.now(),
+                    vibrate: [100, 50, 100],
+                    actions: [
+                      {
+                        icon: '/assets/icons/icon-72x72.png',
+                        action: 'https://primeiro-frontend-angular.vercel.app',
+                        title: 'Abrir',
+                      },
+                    ],
+                  });
+                });
+              }
+            })
           );
         }, 1500);
       },
