@@ -139,7 +139,7 @@ export class TarefaComponent implements OnInit {
                     actions: [
                       {
                         icon: '',
-                        action: 'https://primeiro-frontend-angular.vercel.app',
+                        action: '',
                         title: 'Abrir',
                       },
                     ],

@@ -1,7 +1,6 @@
+import { Component, OnInit } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
 import { PushNotificationService } from 'ng-push-notification';
-import { Component, OnInit } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -38,8 +37,8 @@ export class HomeComponent implements OnInit {
             },
             actions: [
               {
-                icon: '/assets/icons/icon-72x72.png',
-                action: 'https://primeiro-frontend-angular.vercel.app',
+                icon: '',
+                action: '',
                 title: 'Abrir',
               },
             ],
