@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     this.swPush.notificationClicks.subscribe(({ notification }) => {
       // window.open(notification.data);
       this.router
-        .navigateByUrl(`${notification.data}`)
+        .navigateByUrl(`https://primeiro-frontend-angular.vercel.app`)
         .then((res) => {
           console.log(res);
         })
