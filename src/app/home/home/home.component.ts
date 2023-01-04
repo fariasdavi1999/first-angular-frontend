@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //quando a notificacao chegar permite abrir a janela com uma ação
     this.swPush.notificationClicks.subscribe(({ notification }) => {
-      // window.open(notification.data);
+      window.focus();
+      window.open(notification.data);
     });
   }
 
@@ -35,12 +36,7 @@ export class HomeComponent implements OnInit {
             // dir: 'auto',
             timestamp: Date.now(),
             vibrate: [100, 50, 100],
-            data: {
-              onclick: {
-                operation: 'openWindow',
-                url: 'https://primeiro-frontend-angular.vercel.app',
-              },
-            },
+            data: 'https://primeiro-frontend-angular.vercel.app',
             requireInteraction: true,
             actions: [
               {
