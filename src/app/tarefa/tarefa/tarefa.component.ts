@@ -133,7 +133,7 @@ export class TarefaComponent implements OnInit {
                     // dir: 'auto',
                     timestamp: Date.now(),
                     vibrate: [100, 50, 100],
-                    data: 'https://primeiro-frontend-angular.vercel.app',
+                    data: 'https://primeiro-frontend-angular.vercel.app/tarefa',
                     requireInteraction: true,
                     actions: [
                       {
