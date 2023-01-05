@@ -48,9 +48,7 @@ export class HomeComponent implements OnInit {
         });
       }
     });
-    this.swPush.subscription.subscribe((res) => {
-      console.log(JSON.stringify(`dados: ${res}`));
-    });
+    console.log(this.swPush.subscription);
   }
 
   // notifacao via ng-push-notification
