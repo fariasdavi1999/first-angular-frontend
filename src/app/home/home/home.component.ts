@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //quando a notificacao chegar permite abrir a janela com uma ação
     this.swPush.notificationClicks.subscribe(({ notification }) => {
-      window.open(notification.data, '_top');
+      window.open(notification.data);
     });
   }
 
@@ -39,9 +39,9 @@ export class HomeComponent implements OnInit {
             requireInteraction: true,
             actions: [
               {
-                icon: '',
-                action: 'explore',
                 title: 'Abrir',
+                icon: '',
+                action: 'openWindow',
               },
             ],
           });
