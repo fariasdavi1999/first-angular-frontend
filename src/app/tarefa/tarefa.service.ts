@@ -8,7 +8,7 @@ import { Tarefa } from './tarefa';
   providedIn: 'root',
 })
 export class TarefaService {
-  private API = 'http://localhost:8080/api/tarefas';
+  private API = 'https://d160-189-6-34-72.sa.ngrok.io/api/tarefas';
 
   constructor(private http: HttpClient) {}
 
