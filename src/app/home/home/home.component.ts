@@ -19,14 +19,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //quando a notificacao chegar permite abrir a janela com uma ação
     this.swPush.notificationClicks.subscribe(({ notification }) => {
-      window.focus();
-      window.open(notification.data);
+      window.open(notification.data, '_blank');
     });
   }
 
   //através de service worker, no inspecionar(f12) falou pra usar service worker pra notificar no celular(android)
-  notificar() {
-    Notification.requestPermission((result) => {
+  async notificar() {
+    await Notification.requestPermission((result) => {
       if (result === 'granted') {
         navigator.serviceWorker.ready.then((reg) => {
           reg.showNotification('NOVA NOTIFICAÇÃO', {
