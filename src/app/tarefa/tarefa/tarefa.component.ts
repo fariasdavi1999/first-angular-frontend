@@ -122,31 +122,30 @@ export class TarefaComponent implements OnInit {
           detail: 'Tarefa incluida com sucesso!',
         });
         setTimeout(() => {
-          this.router.navigate(['/tarefa']).then(() =>
-            Notification.requestPermission((result) => {
-              if (result === 'granted') {
-                navigator.serviceWorker.ready.then((reg) => {
-                  reg.showNotification('NOVA TAREFA', {
-                    icon: '/assets/icons/icon-72x72.png',
-                    body: 'Tarefa Adicionada!',
-                    lang: 'pt-BR',
-                    // dir: 'auto',
-                    timestamp: Date.now(),
-                    vibrate: [100, 50, 100],
-                    data: 'https://primeiro-frontend-angular.vercel.app/tarefa',
-                    requireInteraction: true,
-                    actions: [
-                      {
-                        icon: '',
-                        action: '',
-                        title: 'Abrir',
-                      },
-                    ],
-                  });
+          this.router.navigate(['/tarefa']);
+          Notification.requestPermission((result) => {
+            if (result === 'granted') {
+              navigator.serviceWorker.ready.then((reg) => {
+                reg.showNotification('NOVA TAREFA', {
+                  icon: '/assets/icons/icon-72x72.png',
+                  body: 'Tarefa Adicionada!',
+                  lang: 'pt-BR',
+                  // dir: 'auto',
+                  timestamp: Date.now(),
+                  vibrate: [100, 50, 100],
+                  data: 'https://primeiro-frontend-angular.vercel.app/tarefa',
+                  requireInteraction: true,
+                  actions: [
+                    {
+                      icon: '',
+                      action: '',
+                      title: 'Abrir',
+                    },
+                  ],
                 });
-              }
-            })
-          );
+              });
+            }
+          });
         }, 1500);
       },
       (erro) => {
