@@ -1,3 +1,5 @@
+import { RelatoriosModule } from './relatorios/relatorios.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -6,27 +8,39 @@ import { HomeModule } from './home/home.module';
 import { TarefaModule } from './tarefa/tarefa.module';
 
 const routes: Routes = [
-
   {
-    path: '', redirectTo: 'home', pathMatch: 'full'
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
 
   {
-    path: 'home', loadChildren: () => HomeModule
+    path: 'home',
+    loadChildren: () => HomeModule,
   },
 
   {
-    path: 'cliente', loadChildren: () => ClienteModule
+    path: 'cliente',
+    loadChildren: () => ClienteModule,
   },
 
   {
-    path: 'tarefa', loadChildren: () => TarefaModule
-  }
+    path: 'tarefa',
+    loadChildren: () => TarefaModule,
+  },
 
+  {
+    path: 'dashboard',
+    loadChildren: () => DashboardModule,
+  },
+  {
+    path: 'relatorios',
+    loadChildren: () => RelatoriosModule,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

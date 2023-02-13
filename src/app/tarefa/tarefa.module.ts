@@ -20,14 +20,8 @@ import { TarefaListaComponent } from './tarefa-lista/tarefa-lista.component';
 import { TarefaRoutingModule } from './tarefa-routing.module';
 import { TarefaComponent } from './tarefa/tarefa.component';
 
-
-
-
 @NgModule({
-  declarations: [
-    TarefaListaComponent,
-    TarefaComponent
-  ],
+  declarations: [TarefaListaComponent, TarefaComponent],
   imports: [
     CommonModule,
     TarefaRoutingModule,
@@ -45,7 +39,7 @@ import { TarefaComponent } from './tarefa/tarefa.component';
     ConfirmDialogModule,
     InputMaskModule,
     InputTextareaModule,
-    CheckboxModule
-  ]
+    CheckboxModule,
+  ],
 })
-export class TarefaModule { }
+export class TarefaModule {}

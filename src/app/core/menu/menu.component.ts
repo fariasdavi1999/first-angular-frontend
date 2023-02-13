@@ -5,28 +5,19 @@ import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
-
-  constructor(
-
-    private router: Router
-
-  ) { }
+  constructor(private router: Router) {}
 
   items!: MenuItem[];
 
-
-
   ngOnInit() {
-
     this.items = [
-
       {
         label: 'Início',
         icon: 'pi pi-home',
-        routerLink: '/home'
+        routerLink: '/home',
       },
       {
         label: 'Agenda',
@@ -35,23 +26,30 @@ export class MenuComponent implements OnInit {
           {
             label: 'Clientes',
             icon: 'pi pi-users',
-            routerLink: '/cliente'
+            routerLink: '/cliente',
           },
           {
             label: 'Tarefas',
             icon: 'pi pi-check-square',
-            routerLink: '/tarefa'
-          }
-        ]
+            routerLink: '/tarefa',
+          },
+        ],
       },
 
       {
-        label: 'Sair',
-        icon: 'pi pi-sign-out',
-      }
+        label: 'Dashboard',
+        routerLink: '/dashboard',
+      },
+      {
+        label: 'Relatórios',
+        routerLink: '/relatorios',
+        icon: 'pi pi-chart-bar',
+      },
 
+      // {
+      //   label: 'Sair',
+      //   icon: 'pi pi-sign-out',
+      // },
     ];
   }
-
 }
-

@@ -12,6 +12,8 @@ import { TarefaService } from 'src/app/tarefa/tarefa.service';
 
 import { MenuComponent } from '../menu/menu.component';
 import { ClienteService } from './../../cliente/cliente.service';
+import { DashboardService } from './../../dashboard/dashboard.service';
+import { RelatoriosService } from './../../relatorios/relatorios.service';
 
 @NgModule({
   declarations: [MenuComponent],
@@ -29,6 +31,8 @@ import { ClienteService } from './../../cliente/cliente.service';
   providers: [
     ClienteService,
     TarefaService,
+    DashboardService,
+    RelatoriosService,
     MessageService,
     ConfirmationService,
     PushNotificationService,

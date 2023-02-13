@@ -1,0 +1,16 @@
+<div class="p-fluid flex justify-content-center">
+  <h1>DashBoard</h1>
+</div>
+
+<div class="p-fluid grid">
+  <div class="field col-6">
+    <p-panel header="Pizza">
+      <p-chart type="pie" [data]="pieChartData"></p-chart>
+    </p-panel>
+  </div>
+  <div class="field col-6">
+    <p-panel header="Linha">
+      <p-chart type="line" [data]="lineChartData"></p-chart>
+    </p-panel>
+  </div>
+</div>
