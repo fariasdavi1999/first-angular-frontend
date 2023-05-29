@@ -1,5 +1,5 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -8,48 +8,66 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
-  constructor(private router: Router) {}
+  usuarioLogado!: boolean;
 
   items!: MenuItem[];
 
-  ngOnInit() {
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.getItensMenuNaoLogado();
+  }
+
+  getItensMenuNaoLogado() {
     this.items = [
       {
         label: 'Início',
-        icon: 'pi pi-home',
-        routerLink: '/home',
+        routerLink: '/',
       },
       {
-        label: 'Agenda',
-        icon: 'pi pi-calendar',
-        items: [
-          {
-            label: 'Clientes',
-            icon: 'pi pi-users',
-            routerLink: '/cliente',
-          },
-          {
-            label: 'Tarefas',
-            icon: 'pi pi-check-square',
-            routerLink: '/tarefa',
-          },
-        ],
+        label: 'Clientes',
+        routerLink: '/cliente',
       },
+      {
+        label: 'Tarefas',
+        routerLink: '/tarefa',
+      },
+      {
+        label: 'Login',
+        routerLink: '/login',
+      },
+      {
+        label: 'Cadastro',
+        routerLink: '/cadastro',
+      },
+    ];
+  }
 
+  getItensMenuLogado() {
+    this.items = [
       {
-        label: 'Dashboard',
-        routerLink: '/dashboard',
+        label: 'Início',
+        routerLink: '/',
       },
       {
-        label: 'Relatórios',
-        routerLink: '/relatorios',
-        icon: 'pi pi-chart-bar',
+        label: 'Planos',
+        routerLink: '/tipo-socio',
       },
-
       // {
       //   label: 'Sair',
-      //   icon: 'pi pi-sign-out',
+      //   command() {
+      //     localStorage.clear();
+      //     window.location.href = '/login';
+      //   },
       // },
     ];
+  }
+
+  logout() {
+    this.usuarioLogado = false;
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+      localStorage.clear();
+    });
   }
 }

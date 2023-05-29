@@ -3,40 +3,39 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Tarefa } from './tarefa';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TarefaService {
-  private API = 'http://localhost:8080/api/tarefas';
+  urlApiTarefas = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.urlApiTarefas = `${environment.urlApi}/tarefas`;
+  }
 
   listarTarefas() {
-    return this.http.get<Array<Tarefa>>(`${this.API}/listar-tarefas`);
+    return this.http.get<Array<Tarefa>>(`${this.urlApiTarefas}/listar-tarefas`);
   }
 
   getById(id: any): Observable<Tarefa> {
-    return this.http.get<Tarefa>(`${this.API}/${id}`);
+    return this.http.get<Tarefa>(`${this.urlApiTarefas}/${id}`);
   }
 
   getByFeito(feito: boolean) {
-    return this.http.get<Tarefa>(`${this.API}/feito/${feito}`);
+    return this.http.get<Tarefa>(`${this.urlApiTarefas}/feito/${feito}`);
   }
 
-  // getByFeito(feito: boolean) {
-  //   return this.http.get<Array<Tarefa>>(`${this.API}/feito/${feito}`);
-  // }
-
   getAlterarTarefa(id: any, request: Tarefa) {
-    return this.http.put<Tarefa>(`${this.API}/${id}`, request);
+    return this.http.put<Tarefa>(`${this.urlApiTarefas}/${id}`, request);
   }
 
   getIncluir(request: Tarefa) {
-    return this.http.post<Tarefa>(this.API, request);
+    return this.http.post<Tarefa>(this.urlApiTarefas, request);
   }
 
   getExcluir(id: any) {
-    return this.http.delete<Tarefa>(`${this.API}/${id}`);
+    return this.http.delete<Tarefa>(`${this.urlApiTarefas}/${id}`);
   }
 }

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PushNotificationService } from 'ng-push-notification';
 import {
-  ConfirmationService,
   ConfirmEventType,
+  ConfirmationService,
   MessageService,
 } from 'primeng/api';
 import { TarefaService } from 'src/app/tarefa/tarefa.service';
@@ -11,7 +10,6 @@ import { TarefaService } from 'src/app/tarefa/tarefa.service';
 import { Cliente } from './../../cliente/cliente';
 import { ClienteService } from './../../cliente/cliente.service';
 import { Tarefa } from './../tarefa';
-import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-tarefa',
@@ -36,10 +34,7 @@ export class TarefaComponent implements OnInit {
     private confirmationService: ConfirmationService,
 
     private router: Router,
-    private route: ActivatedRoute,
-
-    private pushNotification: PushNotificationService,
-    private swPush: SwPush
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -51,11 +46,6 @@ export class TarefaComponent implements OnInit {
     }
 
     this.getClientes();
-
-    //quando a notificacao chegar permite abrir a janela com uma ação
-    this.swPush.notificationClicks.subscribe(({ notification }) => {
-      window.open(notification.data);
-    });
   }
 
   getClientes() {
@@ -123,29 +113,6 @@ export class TarefaComponent implements OnInit {
         });
         setTimeout(() => {
           this.router.navigate(['/tarefa']);
-          Notification.requestPermission((result) => {
-            if (result === 'granted') {
-              navigator.serviceWorker.ready.then((reg) => {
-                reg.showNotification('NOVA TAREFA', {
-                  icon: '/assets/icons/icon-72x72.png',
-                  body: 'Tarefa Adicionada!',
-                  lang: 'pt-BR',
-                  // dir: 'auto',
-                  timestamp: Date.now(),
-                  vibrate: [100, 50, 100],
-                  data: 'https://primeiro-frontend-angular.vercel.app/tarefa',
-                  requireInteraction: true,
-                  actions: [
-                    {
-                      icon: '',
-                      action: '',
-                      title: 'Abrir',
-                    },
-                  ],
-                });
-              });
-            }
-          });
         }, 1500);
       },
       (erro) => {

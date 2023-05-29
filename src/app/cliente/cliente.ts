@@ -1,8 +1,6 @@
 export class Cliente {
-
-    id!: number;
-    cpfCliente!: string;
-    nomeCliente!: string;
-    dataNasc!: string;
-
+  id!: string;
+  cpfCliente!: string;
+  nomeCliente!: string;
+  dataNasc!: string;
 }

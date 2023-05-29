@@ -1,18 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
 * {
   font-family: sans-serif;
 }
 
 body {
-  margin-top: 60px;
   background-color: #e1dfe6;
 }
 
 .aclass {
   display: flex;
-  /* align-items: center;
-  justify-content: center; */
-  /* filter: drop-shadow(1px 1px 1px rgb(115, 112, 112)); */
 }
 
 @media screen and (max-width: 960px) {
