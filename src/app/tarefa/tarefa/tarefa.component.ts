@@ -130,9 +130,7 @@ export class TarefaComponent implements OnInit {
           detail: 'Tarefa alterada com sucesso!',
         });
         setTimeout(() => {
-          this.router
-            .navigate(['/tarefa'])
-            .then(() => window.location.reload());
+          this.router.navigate(['/tarefa']);
         }, 1400);
       },
       (erro) => {

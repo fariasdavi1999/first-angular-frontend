@@ -4,6 +4,7 @@ import { cpf } from 'cpf-cnpj-validator';
 import { LoginService } from './login.service';
 
 import * as uuid from 'uuid';
+import { Cliente } from 'src/app/cliente/cliente';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ import * as uuid from 'uuid';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  cliente = new Cliente();
+
   cpf!: '';
 
   cpfValidado!: boolean;
@@ -20,11 +23,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   async login(cpf: any) {
+    // cpf = this.cpf.replace('.', '').replace('.', '').replace('-', '');
+
     this.loginService.getByCpf(cpf).subscribe(
       (res) => {
-        res.id = uuid.v4();
+        this.cliente = res;
 
-        console.log(res.id);
+        let id: any = this.cliente.id;
+        id = uuid.v4();
+        this.loginService.idUsuario = id;
+
+        console.log(id);
       },
       (erro) => {
         console.log(erro);
