@@ -1,17 +1,28 @@
-import { RelatoriosModule } from './relatorios/relatorios.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ClienteModule } from './cliente/cliente.module';
 import { HomeModule } from './home/home.module';
 import { TarefaModule } from './tarefa/tarefa.module';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginModule } from './guards/login/login.module';
+import { CadastroModule } from './cadastro/cadastro.module';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },
+
+  {
+    path: 'login',
+    loadChildren: () => LoginModule,
+  },
+
+  {
+    path: 'cadastro',
+    loadChildren: () => CadastroModule,
   },
 
   {
@@ -22,20 +33,13 @@ const routes: Routes = [
   {
     path: 'cliente',
     loadChildren: () => ClienteModule,
+    canActivate: [AuthGuard],
   },
 
   {
     path: 'tarefa',
     loadChildren: () => TarefaModule,
-  },
-
-  {
-    path: 'dashboard',
-    loadChildren: () => DashboardModule,
-  },
-  {
-    path: 'relatorios',
-    loadChildren: () => RelatoriosModule,
+    canActivate: [AuthGuard],
   },
 ];
 

@@ -1,3 +1,4 @@
-<nav class="navbar">
-    <p-menubar [model]="items"></p-menubar>
-</nav>
+<div class="justify-content-between menu-loginOut">
+  <p-menubar [model]="items"> </p-menubar>
+  <a *ngIf="usuarioLogado" (click)="logout()">Sair</a>
+</div>

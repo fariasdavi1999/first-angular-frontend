@@ -19,7 +19,7 @@
 </div>
 
 <div class="form">
-  <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()">
+  <form #f="ngForm" (ngSubmit)="salvar()">
     <div class="p-fluid grid justify-content-center">
       <div class="field col-8">
         <span class="p-float-label">
@@ -78,9 +78,6 @@
           ></p-inputMask>
           <label for="date">Data de Nascimento</label>
         </span>
-        <!-- <input id="date" type="date" pInputText required [(ngModel)]="cliente.dataNasc" name="something"
-                        #dataNasc="ngModel"
-                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && dataNasc.invalid && (dataNasc.dirty || dataNasc.touched) }"> -->
       </div>
     </div>
     <div class="grid p-fluid mt-3 m-8">
@@ -91,13 +88,5 @@
         [disabled]="!f.valid"
       ></button>
     </div>
-    <ngx-qrcode
-      class="flex justify-content-center"
-      [elementType]="elementType"
-      [errorCorrectionLevel]="correctionLevel"
-      [value]="cliente.nomeCliente"
-      cssClass=" aclass"
-    >
-    </ngx-qrcode>
   </form>
 </div>
