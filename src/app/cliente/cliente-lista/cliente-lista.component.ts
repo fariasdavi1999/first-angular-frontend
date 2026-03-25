@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  NgxQrcodeElementTypes,
-  NgxQrcodeErrorCorrectionLevels,
-} from '@techiediaries/ngx-qrcode';
-import {
   ConfirmationService,
   ConfirmEventType,
-  LazyLoadEvent,
   MessageService,
 } from 'primeng/api';
+import { TableLazyLoadEvent } from 'primeng/table';
+import { environment } from 'src/environments/environment';
 
 import { Cliente } from './../cliente';
 import { ClienteService } from './../cliente.service';
@@ -18,41 +15,25 @@ import { ClienteService } from './../cliente.service';
   selector: 'app-cliente-lista',
   templateUrl: './cliente-lista.component.html',
   styleUrls: ['./cliente-lista.component.css'],
+  standalone: false,
 })
 export class ClienteListaComponent implements OnInit {
   loading: boolean = false;
 
   totalDeRegistros: number = 0;
 
-  clientes: Cliente[] = new Array<Cliente>();
+  clientes: Cliente[] = [];
 
-  clientesLazyLoad: Cliente[] = new Array<Cliente>();
-
-  cliente: Cliente = new Cliente();
-
-  cols!: any[];
-
-  elementType = NgxQrcodeElementTypes.URL;
-  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  value = '';
+  clientesLazyLoad: Cliente[] = [];
 
   constructor(
     private clienteService: ClienteService,
-
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    this.cols = [
-      { field: 'nome', header: 'nome' },
-      { field: 'cpf', header: 'cpf' },
-      { field: 'genero', header: 'genero' },
-      { field: 'dataNasc', header: 'dataNasc' },
-    ];
-
     this.getTodosClientes();
   }
 
@@ -64,23 +45,34 @@ export class ClienteListaComponent implements OnInit {
     });
   }
 
-  deletar(id: any) {
+  deletar(id: number) {
     this.confirmationService.confirm({
       message: 'Deseja realmente excluir esse cliente?',
       header: 'DELETAR',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Confirmado',
-          detail: 'Você confirmou a operação.',
+        this.clienteService.getExcluir(id).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Excluído',
+              detail: 'Cliente excluído com sucesso.',
+            });
+            this.getTodosClientes();
+          },
+          error: (erro) => {
+            if (!environment.production) {
+              console.error(erro);
+            }
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Não foi possível excluir o cliente.',
+            });
+          },
         });
-        this.clienteService.getExcluir(id).subscribe();
-        setTimeout(() => {
-          return window.location.reload();
-        }, 1500);
       },
-      reject: (type: any) => {
+      reject: (type: ConfirmEventType) => {
         switch (type) {
           case ConfirmEventType.REJECT:
             this.messageService.add({
@@ -101,25 +93,16 @@ export class ClienteListaComponent implements OnInit {
     });
   }
 
-  getExcluir(id: any) {
-    this.clienteService.getExcluir(id).subscribe((response) => {
-      this.cliente = { ...response };
-    });
-  }
-
-  loadCustomers(event: LazyLoadEvent) {
+  loadCustomers(event: TableLazyLoadEvent) {
     this.loading = true;
 
     setTimeout(() => {
-      if (this.clientes) {
-        let numPrimeiraLinha: number = Number(event.first);
-        let numLinhasPagina: number = numPrimeiraLinha + Number(event.rows);
-        this.clientes = [
-          ...this.clientesLazyLoad.slice(numPrimeiraLinha, numLinhasPagina),
-        ];
-
-        this.loading = false;
+      if (this.clientesLazyLoad.length) {
+        const numPrimeiraLinha = Number(event.first);
+        const numLinhasPagina = numPrimeiraLinha + Number(event.rows);
+        this.clientes = [...this.clientesLazyLoad.slice(numPrimeiraLinha, numLinhasPagina)];
       }
+      this.loading = false;
     }, 500);
   }
 }

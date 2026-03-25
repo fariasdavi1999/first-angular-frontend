@@ -5,6 +5,7 @@ import {
   ConfirmationService,
   MessageService,
 } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 import { TarefaService } from 'src/app/tarefa/tarefa.service';
 
 import { Cliente } from './../../cliente/cliente';
@@ -16,29 +17,26 @@ import { Tarefa } from './../tarefa';
   templateUrl: './tarefa.component.html',
   styleUrls: ['./tarefa.component.css'],
   providers: [MessageService, ConfirmationService],
+  standalone: false,
 })
 export class TarefaComponent implements OnInit {
   tarefa: Tarefa = new Tarefa();
 
-  tarefas: Tarefa[] = new Array<Tarefa>();
-
-  clientes: Cliente[] = new Array<Cliente>();
+  clientes: Cliente[] = [];
 
   titulo: string = 'Cadastrar Tarefa';
 
   constructor(
     private tarefaService: TarefaService,
     private clienteService: ClienteService,
-
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    const id: any = this.route.snapshot.params['id'];
+    const id: string = this.route.snapshot.params['id'];
 
     if (id) {
       this.titulo = 'Editar Tarefa';
@@ -54,13 +52,7 @@ export class TarefaComponent implements OnInit {
     });
   }
 
-  getTarefas() {
-    this.tarefaService.listarTarefas().subscribe((response) => {
-      this.tarefas = [...response];
-    });
-  }
-
-  getTarefa(id: any) {
+  getTarefa(id: string) {
     this.tarefaService.getById(id).subscribe((response) => {
       this.tarefa = { ...response };
     });
@@ -82,7 +74,7 @@ export class TarefaComponent implements OnInit {
           this.getIncluir();
         }
       },
-      reject: (type: any) => {
+      reject: (type: ConfirmEventType) => {
         switch (type) {
           case ConfirmEventType.REJECT:
             this.messageService.add({
@@ -104,38 +96,40 @@ export class TarefaComponent implements OnInit {
   }
 
   getIncluir() {
-    this.tarefaService.getIncluir(this.tarefa).subscribe(
-      (response) => {
+    this.tarefaService.getIncluir(this.tarefa).subscribe({
+      next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Inclusão ',
-          detail: 'Tarefa incluida com sucesso!',
+          summary: 'Inclusão',
+          detail: 'Tarefa incluída com sucesso!',
         });
-        setTimeout(() => {
-          this.router.navigate(['/tarefa']);
-        }, 1500);
+        setTimeout(() => this.router.navigate(['/tarefa']), 1500);
       },
-      (erro) => {
-        console.log(erro);
-      }
-    );
+      error: (erro) => {
+        if (!environment.production) {
+          console.error(erro);
+        }
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível incluir a tarefa.' });
+      },
+    });
   }
 
   getAlterar() {
-    this.tarefaService.getAlterarTarefa(this.tarefa.id, this.tarefa).subscribe(
-      (response) => {
+    this.tarefaService.getAlterarTarefa(this.tarefa.id, this.tarefa).subscribe({
+      next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Alteração ',
+          summary: 'Alteração',
           detail: 'Tarefa alterada com sucesso!',
         });
-        setTimeout(() => {
-          this.router.navigate(['/tarefa']);
-        }, 1400);
+        setTimeout(() => this.router.navigate(['/tarefa']), 1400);
       },
-      (erro) => {
-        console.log(erro);
-      }
-    );
+      error: (erro) => {
+        if (!environment.production) {
+          console.error(erro);
+        }
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível alterar a tarefa.' });
+      },
+    });
   }
 }

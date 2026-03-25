@@ -1,12 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ClienteModule } from './cliente/cliente.module';
-import { HomeModule } from './home/home.module';
-import { TarefaModule } from './tarefa/tarefa.module';
-import { AuthGuard } from './guards/auth.guard';
-import { LoginModule } from './guards/login/login.module';
-import { CadastroModule } from './cadastro/cadastro.module';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,29 +12,29 @@ const routes: Routes = [
 
   {
     path: 'login',
-    loadChildren: () => LoginModule,
+    loadChildren: () => import('./guards/login/login.module').then(m => m.LoginModule),
   },
 
   {
     path: 'cadastro',
-    loadChildren: () => CadastroModule,
+    loadChildren: () => import('./cadastro/cadastro.module').then(m => m.CadastroModule),
   },
 
   {
     path: 'home',
-    loadChildren: () => HomeModule,
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
   },
 
   {
     path: 'cliente',
-    loadChildren: () => ClienteModule,
-    canActivate: [AuthGuard],
+    loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule),
+    canActivate: [authGuard],
   },
 
   {
     path: 'tarefa',
-    loadChildren: () => TarefaModule,
-    canActivate: [AuthGuard],
+    loadChildren: () => import('./tarefa/tarefa.module').then(m => m.TarefaModule),
+    canActivate: [authGuard],
   },
 ];
 

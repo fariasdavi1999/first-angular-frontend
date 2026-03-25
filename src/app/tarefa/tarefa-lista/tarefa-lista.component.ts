@@ -3,9 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {
   ConfirmationService,
   ConfirmEventType,
-  LazyLoadEvent,
   MessageService,
 } from 'primeng/api';
+import { TableLazyLoadEvent } from 'primeng/table';
+import { environment } from 'src/environments/environment';
 
 import { Tarefa } from './../tarefa';
 import { TarefaService } from './../tarefa.service';
@@ -15,6 +16,7 @@ import { TarefaService } from './../tarefa.service';
   templateUrl: './tarefa-lista.component.html',
   styleUrls: ['./tarefa-lista.component.css'],
   providers: [MessageService, ConfirmationService],
+  standalone: false,
 })
 export class TarefaListaComponent implements OnInit {
   loading: boolean = true;
@@ -25,28 +27,25 @@ export class TarefaListaComponent implements OnInit {
 
   tarefas: Tarefa[] = [];
 
-  tarefasLazyLoad: Tarefa[] = new Array<Tarefa>();
-
-  tarefa: Tarefa = new Tarefa();
+  tarefasLazyLoad: Tarefa[] = [];
 
   constructor(
     private tarefaService: TarefaService,
-
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    let feito: boolean = this.route.snapshot.params['feito'];
+    const feitoParam: string = this.route.snapshot.params['feito'];
+    const feito = feitoParam === 'true';
 
-    if (feito) {
-      this.getTarefaFeita(feito);
+    if (feitoParam !== undefined) {
+      this.getTarefasPorFeito(feito);
+    } else {
+      this.getTodasTarefas();
     }
-
-    this.getTodasTarefas();
   }
 
   getTodasTarefas() {
@@ -57,31 +56,44 @@ export class TarefaListaComponent implements OnInit {
     });
   }
 
-  getTarefaFeita(feito: boolean) {
+  getTarefasPorFeito(feito: boolean) {
     this.tarefaService.getByFeito(feito).subscribe((response) => {
-      this.tarefa = { ...response };
+      this.tarefas = Array.isArray(response) ? [...response] : [response];
+      this.tarefasLazyLoad = [...this.tarefas];
+      this.totalDeRegistros = this.tarefas.length;
     });
   }
 
-  deletar(id: any) {
+  deletar(id: number) {
     this.confirmationService.confirm({
       message: 'Deseja realmente excluir essa tarefa?',
       header: 'DELETAR',
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Confirmado',
-          detail: 'Você confirmou a operação.',
+        this.tarefaService.getExcluir(id).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Excluído',
+              detail: 'Tarefa excluída com sucesso.',
+            });
+            this.getTodasTarefas();
+          },
+          error: (erro) => {
+            if (!environment.production) {
+              console.error(erro);
+            }
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Não foi possível excluir a tarefa.',
+            });
+          },
         });
-        this.tarefaService.getExcluir(id).subscribe();
-        setTimeout(() => {
-          return window.location.reload();
-        }, 1100);
       },
 
-      reject: (type: any) => {
+      reject: (type: ConfirmEventType) => {
         switch (type) {
           case ConfirmEventType.REJECT:
             this.messageService.add({
@@ -102,25 +114,16 @@ export class TarefaListaComponent implements OnInit {
     });
   }
 
-  getExcluir(id: any) {
-    this.tarefaService.getExcluir(id).subscribe((response) => {
-      this.tarefa = { ...response };
-    });
-  }
-
-  loadCustomers(event: LazyLoadEvent) {
+  loadCustomers(event: TableLazyLoadEvent) {
     this.loading = true;
 
     setTimeout(() => {
-      if (this.tarefas) {
-        let numPrimeiraLinha: number = Number(event.first);
-        let numLinhasPagina: number = numPrimeiraLinha + Number(event.rows);
-        this.tarefas = [
-          ...this.tarefasLazyLoad.slice(numPrimeiraLinha, numLinhasPagina),
-        ];
-
-        this.loading = false;
+      if (this.tarefasLazyLoad.length) {
+        const numPrimeiraLinha = Number(event.first);
+        const numLinhasPagina = numPrimeiraLinha + Number(event.rows);
+        this.tarefas = [...this.tarefasLazyLoad.slice(numPrimeiraLinha, numLinhasPagina)];
       }
+      this.loading = false;
     }, 500);
   }
 }

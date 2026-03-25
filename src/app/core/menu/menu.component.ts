@@ -6,13 +6,14 @@ import { MenuItem } from 'primeng/api';
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
+  standalone: false,
 })
 export class MenuComponent implements OnInit {
   usuarioLogado!: boolean;
 
   items!: MenuItem[];
 
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {
     this.getItensMenuNaoLogado();
@@ -65,9 +66,7 @@ export class MenuComponent implements OnInit {
 
   logout() {
     this.usuarioLogado = false;
-    this.router.navigate(['/login']).then(() => {
-      window.location.reload();
-      localStorage.clear();
-    });
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }
