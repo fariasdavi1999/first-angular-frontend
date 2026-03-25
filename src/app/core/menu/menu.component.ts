@@ -66,9 +66,7 @@ export class MenuComponent implements OnInit {
 
   logout() {
     this.usuarioLogado = false;
-    this.router.navigate(['/login']).then(() => {
-      globalThis.location.reload();
-      localStorage.clear();
-    });
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

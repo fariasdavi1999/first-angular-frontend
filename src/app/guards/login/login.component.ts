@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { Cliente } from 'src/app/cliente/cliente';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -9,44 +10,36 @@ import { Cliente } from 'src/app/cliente/cliente';
   styleUrls: ['./login.component.css'],
   standalone: false,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   cliente = new Cliente();
 
-  cpf!: '';
+  cpf = '';
 
-  cpfValidado!: boolean;
+  cpfValidado = false;
 
   constructor(
     private readonly router: Router,
     private readonly loginService: LoginService,
   ) {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
-  async login(cpf: any) {
-
-    this.loginService.getByCpf(cpf).subscribe(
-      (res) => {
+  login(cpf: string) {
+    this.loginService.getByCpf(cpf).subscribe({
+      next: (res) => {
         this.cliente = res;
-
-        let id: any = this.cliente.id;
-        id = crypto.randomUUID();
-        this.loginService.idUsuario = id;
-
-        console.log(id);
+        const id = crypto.randomUUID();
+        this.loginService.setIdUsuario(id);
       },
-      (erro) => {
-        console.log(erro);
+      error: (erro) => {
+        if (!environment.production) {
+          console.error(erro);
+        }
       },
-    );
+    });
   }
 
   voltarParaInicio() {
-    localStorage.clear();
-    this.router.navigate(['/']).then(() => {
-      window.location.reload();
-    });
+    this.loginService.logout();
+    this.router.navigate(['/']);
   }
 
   validateCpf(event: Event) {
