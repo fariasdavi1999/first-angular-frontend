@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 
 import { Cliente } from '../cliente';
@@ -12,7 +11,8 @@ import { ClienteService } from './../cliente.service';
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.css'],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService],
+  standalone: false,
 })
 
 export class ClienteComponent implements OnInit {
@@ -135,8 +135,5 @@ export class ClienteComponent implements OnInit {
   }
 
 
-  elementType = NgxQrcodeElementTypes.URL;
-  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  value = '';
 
 }

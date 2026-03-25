@@ -3,9 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {
   ConfirmationService,
   ConfirmEventType,
-  LazyLoadEvent,
   MessageService,
 } from 'primeng/api';
+import { TableLazyLoadEvent } from 'primeng/table';
 
 import { Tarefa } from './../tarefa';
 import { TarefaService } from './../tarefa.service';
@@ -15,6 +15,7 @@ import { TarefaService } from './../tarefa.service';
   templateUrl: './tarefa-lista.component.html',
   styleUrls: ['./tarefa-lista.component.css'],
   providers: [MessageService, ConfirmationService],
+  standalone: false,
 })
 export class TarefaListaComponent implements OnInit {
   loading: boolean = true;
@@ -108,7 +109,7 @@ export class TarefaListaComponent implements OnInit {
     });
   }
 
-  loadCustomers(event: LazyLoadEvent) {
+  loadCustomers(event: TableLazyLoadEvent) {
     this.loading = true;
 
     setTimeout(() => {

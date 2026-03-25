@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AccordionModule } from 'primeng/accordion';
@@ -13,11 +13,12 @@ import { ClienteService } from './../../cliente/cliente.service';
 @NgModule({
   declarations: [MenuComponent],
 
-  imports: [CommonModule, AccordionModule, MenubarModule, HttpClientModule],
+  imports: [CommonModule, AccordionModule, MenubarModule],
 
   exports: [MenuComponent],
 
   providers: [
+    provideHttpClient(withInterceptorsFromDi()),
     ClienteService,
     TarefaService,
     MessageService,

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClienteModule } from './cliente/cliente.module';
 import { HomeModule } from './home/home.module';
 import { TarefaModule } from './tarefa/tarefa.module';
-import { AuthGuard } from './guards/auth.guard';
+import { authGuard } from './guards/auth.guard';
 import { LoginModule } from './guards/login/login.module';
 import { CadastroModule } from './cadastro/cadastro.module';
 
@@ -33,13 +33,13 @@ const routes: Routes = [
   {
     path: 'cliente',
     loadChildren: () => ClienteModule,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
 
   {
     path: 'tarefa',
     loadChildren: () => TarefaModule,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
 ];
 

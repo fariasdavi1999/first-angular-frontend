@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  NgxQrcodeElementTypes,
-  NgxQrcodeErrorCorrectionLevels,
-} from '@techiediaries/ngx-qrcode';
-import {
   ConfirmationService,
   ConfirmEventType,
-  LazyLoadEvent,
   MessageService,
 } from 'primeng/api';
+import { TableLazyLoadEvent } from 'primeng/table';
 
 import { Cliente } from './../cliente';
 import { ClienteService } from './../cliente.service';
@@ -18,6 +14,7 @@ import { ClienteService } from './../cliente.service';
   selector: 'app-cliente-lista',
   templateUrl: './cliente-lista.component.html',
   styleUrls: ['./cliente-lista.component.css'],
+  standalone: false,
 })
 export class ClienteListaComponent implements OnInit {
   loading: boolean = false;
@@ -32,9 +29,6 @@ export class ClienteListaComponent implements OnInit {
 
   cols!: any[];
 
-  elementType = NgxQrcodeElementTypes.URL;
-  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  value = '';
 
   constructor(
     private clienteService: ClienteService,
@@ -107,7 +101,7 @@ export class ClienteListaComponent implements OnInit {
     });
   }
 
-  loadCustomers(event: LazyLoadEvent) {
+  loadCustomers(event: TableLazyLoadEvent) {
     this.loading = true;
 
     setTimeout(() => {

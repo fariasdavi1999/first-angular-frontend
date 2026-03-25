@@ -16,6 +16,7 @@ import { Tarefa } from './../tarefa';
   templateUrl: './tarefa.component.html',
   styleUrls: ['./tarefa.component.css'],
   providers: [MessageService, ConfirmationService],
+  standalone: false,
 })
 export class TarefaComponent implements OnInit {
   tarefa: Tarefa = new Tarefa();
