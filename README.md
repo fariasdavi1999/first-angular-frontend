@@ -1,28 +1,119 @@
+# First Angular Frontend
 
-# Primeiro Frontend Angular
+Aplicação frontend desenvolvida em **Angular 19** com **PrimeNG 17**, servindo como projeto de aprendizado e referência de boas práticas com NgModule, lazy loading e autenticação via guard.
 
+## Stack
 
+| Tecnologia | Versão |
+|---|---|
+| Angular | ^19.0.0 |
+| TypeScript | ~5.6.0 |
+| PrimeNG | ^17.18.0 |
+| PrimeFlex | ^3.3.1 |
+| PrimeIcons | ^7.0.0 |
+| RxJS | ~7.8.0 |
+| zone.js | ~0.15.0 |
 
-## AppAngular
+## Módulos e Rotas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
+| Rota | Módulo | Guard |
+|---|---|---|
+| `/` | redireciona para `/home` | — |
+| `/login` | `LoginModule` | — |
+| `/cadastro` | `CadastroModule` | — |
+| `/home` | `HomeModule` | — |
+| `/cliente` | `ClienteModule` | `authGuard` |
+| `/tarefa` | `TarefaModule` | `authGuard` |
 
-## Development server
+Todos os módulos de feature são carregados via **lazy loading**.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Estrutura do Projeto
 
-## Code scaffolding
+```
+src/
+├── app/
+│   ├── app.module.ts               # Root NgModule
+│   ├── app-routing.module.ts       # Rotas principais
+│   ├── cadastro/                   # Módulo de cadastro de usuário
+│   ├── cliente/                    # Módulo de clientes (CRUD)
+│   │   ├── cliente.service.ts
+│   │   ├── cliente/                # Formulário
+│   │   └── cliente-lista/          # Listagem
+│   ├── core/
+│   │   ├── core/core.module.ts     # Provê HttpClient
+│   │   └── menu/                   # Componente de menu
+│   ├── guards/
+│   │   ├── auth.guard.ts           # CanActivateFn
+│   │   └── login/                  # Módulo e componente de login
+│   ├── home/                       # Módulo home
+│   └── tarefa/                     # Módulo de tarefas (CRUD)
+│       ├── tarefa.service.ts
+│       ├── tarefa/                 # Formulário
+│       └── tarefa-lista/           # Listagem
+├── environments/
+│   ├── environment.ts              # dev  → urlApi: http://localhost:8080/api
+│   └── environment.prod.ts         # prod → urlApi: <url de produção>
+└── styles.css
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Pré-requisitos
+
+- Node.js >= 18
+- Angular CLI >= 19 (`npm install -g @angular/cli`)
+- Backend rodando em `http://localhost:8080/api` (desenvolvimento)
+
+## Instalação
+
+```bash
+npm install
+```
+
+## Desenvolvimento
+
+```bash
+npm start
+# ou
+ng serve
+```
+
+Acesse `http://localhost:4200/`. A aplicação recarrega automaticamente ao salvar arquivos.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+# Produção
+npm run build
 
-## Running unit tests
+# Watch (desenvolvimento)
+npm run watch
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Os artefatos são gerados em `dist/`.
 
-## Running end-to-end tests
+## Testes
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+# Unitários (Karma + Jasmine)
+npm test
+```
+
+## Configuração de Ambiente
+
+O arquivo `src/environments/environment.ts` define a URL da API:
+
+```ts
+export const environment = {
+  production: false,
+  urlApi: 'http://localhost:8080/api',
+};
+```
+
+Para produção, o Angular substitui automaticamente pelo `environment.prod.ts` durante o build.
+
+## Geração de Código
+
+```bash
+ng generate component nome-do-componente
+ng generate service nome-do-servico
+ng generate module nome-do-modulo --routing
+```
